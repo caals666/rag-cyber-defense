@@ -331,7 +331,7 @@ Usage instructions will be added after the initial RAG and knowledge-graph pipel
 
 ### Phase 1 — Research & Planning
 
-- [ ] Study project requirements
+- [x] Study project requirements
 - [ ] Study CVE dataset structure
 - [ ] Study CWE dataset structure
 - [ ] Study CAPEC dataset structure
