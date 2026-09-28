@@ -264,15 +264,23 @@ python build_datasets.py <raw_dir>
 | CAPEC | `https://capec.mitre.org/data/csv/1000.csv.zip` |
 | ATT&CK | `https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json` |
 
-**3. Load the graph**
-
-Copy the four CSVs into Neo4j's import folder, then run:
+**3. Build the fifth dataset** (optional, the outputs are already in `data/processed/`)
 
 ```bash
-docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/load_graph.cypher
+python build_attack_path_dataset.py
 ```
 
-This script clears the existing graph before loading.
+**4. Load the graph**
+
+Copy the four `data/raw/` CSVs plus `cyber_relationships.csv` and `cyber_attack_path_dataset.csv` into Neo4j's import folder, then run the three scripts in order:
+
+```bash
+docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/schema.cypher
+docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/load_graph.cypher
+docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/vector_index.cypher
+```
+
+`load_graph.cypher` clears the existing graph before loading. Tested queries are in `neo4j/example_queries.cypher`.
 
 ---
 
@@ -357,6 +365,7 @@ rag-cyber-defense/
 ├── docker-compose.yml            (planned)  neo4j + backend + frontend
 │
 ├── build_datasets.py                        raw sources -> 4 clean CSVs
+├── build_attack_path_dataset.py             4 CSVs -> fifth dataset + reports
 │
 ├── data/
 │   ├── raw/                                 the 4 datasets
@@ -365,12 +374,18 @@ rag-cyber-defense/
 │   │   ├── capec_dataset.csv
 │   │   ├── attack_dataset.csv
 │   │   └── inspect_datasets.ipynb
-│   └── processed/                (planned)  embeddings, benchmark set
+│   └── processed/                           fifth dataset and reports
+│       ├── cyber_attack_path_dataset.csv
+│       ├── cyber_relationships.csv
+│       ├── dataset_inspection_report.txt
+│       ├── data_quality_report.txt
+│       └── pipeline_output.txt
 │
 ├── neo4j/
-│   ├── load_graph.cypher                    builds the graph from the CSVs
-│   ├── schema.cypher             (planned)  constraints and indexes
-│   └── vector_index.cypher       (planned)  vector index setup
+│   ├── schema.cypher                        1. constraints and indexes
+│   ├── load_graph.cypher                    2. nodes and relationships
+│   ├── vector_index.cypher                  3. vector indexes
+│   └── example_queries.cypher               10 tested queries
 │
 ├── backend/                      (planned)
 │   ├── main.py                              FastAPI entry point
@@ -405,12 +420,13 @@ rag-cyber-defense/
 │   ├── test_graph.py
 │   └── test_retrieval.py
 │
-├── docs/                         (planned)
-│   ├── architecture.md
-│   ├── knowledge-graph.md
-│   ├── data-sources.md
-│   ├── rag-pipeline.md
-│   └── evaluation.md
+├── docs/
+│   ├── fifth_dataset_documentation.md       the fifth dataset, explained
+│   ├── architecture.md           (planned)
+│   ├── knowledge-graph.md        (planned)
+│   ├── data-sources.md           (planned)
+│   ├── rag-pipeline.md           (planned)
+│   └── evaluation.md             (planned)
 │
 └── .github/
     └── workflows/                (planned)  CI and weekly data refresh

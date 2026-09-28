@@ -1,3 +1,15 @@
+# Only the datasets, LICENSE and this file are tracked for now. Everything else is ignored.
+/*
+!/.gitignore
+!/LICENSE
+!/data/
+
+# inside data/, keep only the four source datasets folder
+/data/*
+!/data/raw/
+
+# never commit
 nvdcve-*.json
-build_datasets.py
-neo4j
+__pycache__/
+*.pyc
+.env
