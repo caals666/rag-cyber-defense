@@ -1,0 +1,78 @@
+# Full stack:  docker compose up --build
+#   frontend  http://localhost:3000
+#   backend   http://localhost:8000/docs
+#   neo4j     http://localhost:7474   (neo4j / password from .env)
+#
+# Settings come from .env (copy .env.example to .env first).
+
+services:
+  neo4j:
+    image: neo4j:5
+    ports:
+      - "7474:7474"   # browser
+      - "7687:7687"   # bolt (drivers)
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:-password123}
+    volumes:
+      - neo4j_data:/data
+      - ./data/raw:/import:ro          # the 4 datasets, read by LOAD CSV
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p '${NEO4J_PASSWORD:-password123}' 'RETURN 1' || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 20s
+
+  # Builds the graph once. Skips loading if the graph already has nodes.
+  neo4j-init:
+    image: neo4j:5
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - ./neo4j:/scripts:ro
+    environment:
+      PW: ${NEO4J_PASSWORD:-password123}
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        CS="cypher-shell -a bolt://neo4j:7687 -u neo4j -p $$PW"
+        N=$$($$CS --format plain "MATCH (n) RETURN count(n)" | tail -n 1)
+        if [ "$$N" = "0" ]; then
+          echo "Empty graph: loading..."
+          for f in schema load_graph vector_index; do
+            echo "running $$f.cypher" && $$CS -f /scripts/$$f.cypher || exit 1
+          done
+          echo "Graph loaded."
+        else
+          echo "Graph already has $$N nodes, skipping load."
+        fi
+    restart: "no"
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:-password123}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
+      CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      neo4j:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  neo4j_data:

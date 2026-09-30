@@ -1,15 +1,23 @@
-# Only the datasets, LICENSE and this file are tracked for now. Everything else is ignored.
+# Whitelist: everything is ignored unless listed below.
 /*
 !/.gitignore
 !/LICENSE
+!/README.md
+!/.env.example
+!/docker-compose.yml
+!/backend/
+!/frontend/
+!/neo4j/
 !/data/
 
-# inside data/, keep only the four source datasets folder
+# inside data/, keep only the four source datasets
 /data/*
 !/data/raw/
 
 # never commit
+.env
 nvdcve-*.json
 __pycache__/
 *.pyc
-.env
+node_modules/
+.next/

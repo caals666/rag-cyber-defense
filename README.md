@@ -109,7 +109,7 @@ The system has two halves. The **build stage** runs once and prepares the graph.
            ids, descriptions, scores and mitigations
                                │
                                ▼
-                       LLM (Llama 3)
+                       LLM (Groq)   
               prompt = cleaned facts + user question
                                │
                                ▼
@@ -239,23 +239,86 @@ The CVE data currently covers 2024 only. The paper used every year (242,504 CVEs
 
 ## Quick Start
 
-**1. Start Neo4j in Docker**
+The whole system runs with Docker Compose: Neo4j, a one-time graph loader, the FastAPI backend and the Next.js frontend.
+
+**Requirements:** Docker Desktop, and a free Groq API key from https://console.groq.com/keys
+
+**1. Configure**
 
 ```bash
-docker run -d --name neo4j \
-  -p 7474:7474 -p 7687:7687 \
-  -e NEO4J_AUTH=neo4j/password123 \
-  -v neo4j_data:/data -v ${PWD}/import:/import \
-  neo4j:5
+cp .env.example .env
 ```
 
-Open http://localhost:7474 and log in with `neo4j` / `password123`.
+Open `.env` and set `GROQ_API_KEY`. Never commit `.env`.
 
-**2. Build the datasets** (optional, the CSVs are already in `data/raw/`)
+**2. Build and start everything**
 
 ```bash
-python build_datasets.py <raw_dir>
+docker compose up --build -d
 ```
+
+On the first start, the `neo4j-init` service builds the graph from the four CSVs in `data/raw/` (about 30 seconds). Later starts skip this because the graph is already stored in the `neo4j_data` volume.
+
+**3. Open**
+
+| Service | URL |
+|---|---|
+| Frontend (ask questions) | http://localhost:3000 |
+| Backend API docs | http://localhost:8000/docs |
+| Backend health check | http://localhost:8000/health |
+| Neo4j Browser | http://localhost:7474 (`neo4j` / password from `.env`) |
+
+### Docker commands
+
+| Task | Command |
+|---|---|
+| Build all images | `docker compose build` |
+| Build one image | `docker compose build backend` |
+| Start everything | `docker compose up -d` |
+| Rebuild after code changes | `docker compose up --build -d` |
+| Rebuild and restart one service | `docker compose up --build -d backend` |
+| See running services | `docker compose ps` |
+| Follow logs | `docker compose logs -f backend` |
+| Check the graph load | `docker compose logs neo4j-init` |
+| Stop (keeps the graph) | `docker compose down` |
+| Stop and delete the graph | `docker compose down -v` |
+| Reload the graph from scratch | `docker compose down -v` then `docker compose up -d` |
+| Cypher shell | `docker compose exec neo4j cypher-shell -u neo4j -p password123` |
+| Run a Cypher file | `docker compose exec -T neo4j cypher-shell -u neo4j -p password123 < neo4j/example_queries.cypher` |
+
+Build a single image without Compose:
+
+```bash
+docker build -t rag-cyber-backend ./backend
+docker build -t rag-cyber-frontend --build-arg NEXT_PUBLIC_API_URL=http://localhost:8000 ./frontend
+```
+
+### Try the API
+
+```bash
+curl http://localhost:8000/health
+curl http://localhost:8000/cve/CVE-2024-24919
+curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" \
+     -d '{"question": "Which ATT&CK techniques are reachable from CVE-2024-24919?"}'
+```
+
+### Run without Docker (development)
+
+```bash
+# backend, with Neo4j running from compose
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload            # http://localhost:8000
+
+# frontend
+cd frontend
+npm install
+npm run dev                          # http://localhost:3000
+```
+
+### Rebuilding the datasets (optional)
+
+The four CSVs are already in `data/raw/`. To regenerate them, download the sources and run `python build_datasets.py <raw_dir>`.
 
 | Source | URL |
 |---|---|
@@ -263,24 +326,6 @@ python build_datasets.py <raw_dir>
 | CWE | `https://cwe.mitre.org/data/csv/1000.csv.zip` |
 | CAPEC | `https://capec.mitre.org/data/csv/1000.csv.zip` |
 | ATT&CK | `https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json` |
-
-**3. Build the fifth dataset** (optional, the outputs are already in `data/processed/`)
-
-```bash
-python build_attack_path_dataset.py
-```
-
-**4. Load the graph**
-
-Copy the four `data/raw/` CSVs plus `cyber_relationships.csv` and `cyber_attack_path_dataset.csv` into Neo4j's import folder, then run the three scripts in order:
-
-```bash
-docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/schema.cypher
-docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/load_graph.cypher
-docker exec -i neo4j cypher-shell -u neo4j -p password123 < neo4j/vector_index.cypher
-```
-
-`load_graph.cypher` clears the existing graph before loading. Tested queries are in `neo4j/example_queries.cypher`.
 
 ---
 
@@ -302,7 +347,7 @@ RETURN p
 Attacks linked to a weakness:
 
 ```cypher
-MATCH (w:CWE {id:'CWE-89'})-[:CWE_CAPEC]->(c:CAPEC)-[:CAPEC_ATTACK]->(t:ATTACK)
+MATCH (w:CWE {id:'CWE-287'})-[:CWE_CAPEC]->(c:CAPEC)-[:CAPEC_ATTACK]->(t:ATTACK)
 RETURN w.name, c.id, c.name, t.id, t.name
 ```
 
@@ -340,12 +385,12 @@ RETURN c.id, c.name, c.base_score ORDER BY c.base_score DESC LIMIT 20
 
 | Layer | Technology |
 |---|---|
-| Data processing | Python, `json`, `csv`, `re` |
+| Data processing | Python, pandas, `json`, `csv`, `re` |
 | Graph database | Neo4j 5 (Docker), Cypher |
 | Embeddings | `sentence-transformers` (all-MiniLM-L6-v2), Neo4j vector index |
-| LLM | Llama 3 via Groq or Ollama |
+| LLM | Groq API, model `openai/gpt-oss-120b` (configurable via `GROQ_MODEL`) |
 | Backend | FastAPI, Neo4j Python driver |
-| Frontend | Next.js, Supabase (auth), react-force-graph |
+| Frontend | Next.js 15, Supabase auth (planned), react-force-graph (planned) |
 | DevOps | Docker, Docker Compose, GitHub Actions |
 
 ---
@@ -360,9 +405,8 @@ rag-cyber-defense/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
-├── .env.example                  (planned)  template for secrets
-├── requirements.txt              (planned)
-├── docker-compose.yml            (planned)  neo4j + backend + frontend
+├── .env.example                             template for secrets (copy to .env)
+├── docker-compose.yml                       neo4j + graph loader + backend + frontend
 │
 ├── build_datasets.py                        raw sources -> 4 clean CSVs
 ├── build_attack_path_dataset.py             4 CSVs -> fifth dataset + reports
@@ -387,28 +431,30 @@ rag-cyber-defense/
 │   ├── vector_index.cypher                  3. vector indexes
 │   └── example_queries.cypher               10 tested queries
 │
-├── backend/                      (planned)
-│   ├── main.py                              FastAPI entry point
-│   ├── config.py                            settings and env vars
+├── backend/                                 FastAPI
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── main.py                              app entry point, CORS
+│   ├── config.py                            settings from env vars
 │   ├── graph/
 │   │   ├── connection.py                    Neo4j driver
-│   │   └── queries.py                       reusable Cypher
-│   ├── retrieval/
-│   │   ├── direct.py                        ID lookup
-│   │   ├── text_to_cypher.py                question -> Cypher
-│   │   ├── vector.py                        embeddings + similarity
-│   │   └── hybrid.py                        vector + graph merge
+│   │   └── queries.py                       tested Cypher templates
 │   ├── rag/
-│   │   ├── prompts.py                       prompt templates
-│   │   ├── context.py                       cleaning, citations
-│   │   └── pipeline.py                      retrieve -> generate
-│   └── api/
-│       └── routes.py                        /ask, /graph, /cve/{id}
+│   │   └── pipeline.py                      IDs -> Neo4j -> Groq answer
+│   ├── api/
+│   │   └── routes.py                        /health, /cve/{id}, /ask
+│   └── retrieval/                (planned)  text-to-Cypher, vector, hybrid
 │
-├── frontend/                     (planned)
-│   ├── app/                                 Next.js pages
-│   ├── components/                          chat, graph view, cards
-│   └── lib/                                 API client, Supabase auth
+├── frontend/                                Next.js
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── next.config.mjs
+│   ├── app/
+│   │   ├── layout.jsx
+│   │   ├── page.jsx                         question box, answer, facts
+│   │   └── globals.css
+│   ├── components/               (planned)  graph view, cards
+│   └── lib/                      (planned)  API client, Supabase auth
 │
 ├── evaluation/                   (planned)
 │   ├── questions.json                       150 questions + ground truth
@@ -452,22 +498,26 @@ rag-cyber-defense/
 - [ ] Add the remaining CVE years
 
 **Phase 4 — Retrieval** (current)
-- [ ] Set up FastAPI and connect to Neo4j
-- [ ] Direct ID lookup
+- [x] Set up FastAPI and connect to Neo4j
+- [x] Direct ID lookup
+- [x] Keyword search (full-text index) for questions with no ID
 - [ ] Text-to-Cypher
 - [ ] Embeddings and the Neo4j vector index
 - [ ] Hybrid retrieval
 
 **Phase 5 — RAG and LLM**
-- [ ] Connect Llama 3
-- [ ] Prompt templates and context cleaning
-- [ ] Answers with citations
-- [ ] Handle "no information found"
+- [x] Connect the LLM (Groq, gpt-oss-120b)
+- [x] Grounded prompt template
+- [x] Answers with citations
+- [x] Handle "no information found"
+- [ ] Context cleaning and token limits for very large results
 
 **Phase 6 — Application**
-- [ ] Next.js chat interface with Supabase auth
+- [x] Next.js question page
+- [x] Docker Compose for the full stack
+- [ ] Supabase auth
 - [ ] Interactive attack-path graph
-- [ ] Docker Compose, CI and deployment
+- [ ] CI and deployment
 
 **Phase 7 — Evaluation**
 - [ ] 150 test questions with ground truth
