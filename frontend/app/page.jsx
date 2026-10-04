@@ -56,10 +56,24 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: text }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        let detail = "The backend returned an error.";
+        try {
+          const payload = await res.json();
+          detail = payload.detail || payload.message || JSON.stringify(payload);
+        } catch {
+          try {
+            detail = await res.text();
+          } catch {
+            detail = "Unknown API error.";
+          }
+        }
+        throw new Error(detail);
+      }
       setResult(await res.json());
-    } catch {
-      setError("Something went wrong while getting your answer. Please try again in a moment.");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Something went wrong while getting your answer. Please try again in a moment.";
+      setError(message);
     } finally {
       setLoading(false);
     }

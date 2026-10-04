@@ -34,4 +34,7 @@ def cve(cve_id: str):
 def ask(body: Question):
     if not body.question.strip():
         raise HTTPException(400, "question is empty")
-    return answer(body.question.strip())
+    try:
+        return answer(body.question.strip())
+    except Exception as exc:
+        raise HTTPException(500, f"API error: {exc}") from exc
