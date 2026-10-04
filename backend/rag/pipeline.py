@@ -15,13 +15,16 @@ ID_PATTERN = re.compile(r"\b(CVE-\d{4}-\d{4,}|CWE-\d+|CAPEC-\d+|T\d{4}(?:\.\d{3}
 LOOKUPS = {"CVE": queries.CVE_CHAIN, "CWE": queries.CWE_CHAIN,
            "CAPEC": queries.CAPEC_CHAIN, "T": queries.ATTACK_NODE}
 MAX_LIST = 40  # cap long neighbour lists so the prompt stays small
+MAX_PATHS = 150  # paths are short strings, so keep more of them
 
 SYSTEM_PROMPT = """You are a cybersecurity analyst assistant.
 Answer ONLY from the JSON facts provided, which come from a Neo4j knowledge graph built from
 NVD CVE, MITRE CWE, MITRE CAPEC and MITRE ATT&CK data.
 Rules:
 - Never invent IDs, scores or relationships. If a link is not in the facts, it does not exist in the data.
-- Cite IDs in brackets, e.g. [CVE-2024-24919], [CWE-200].
+- Cite IDs in square brackets, e.g. [CVE-2024-24919], [CWE-200].
+- "paths" lists every real chain (e.g. "CWE-200 -> CAPEC-169 -> T1592"). Describe connections only from these.
+- "counts" holds the true number of items per list; lists may be cut short, so use counts for totals.
 - Structure the answer in three short sections:
   **Retrieved facts** - what the graph returned.
   **Attack-path analysis** - what the connections mean (counts, CWE -> CAPEC -> ATT&CK chains).
@@ -33,9 +36,9 @@ def extract_ids(question):
     return list(dict.fromkeys(m.upper() for m in ID_PATTERN.findall(question)))
 
 
-def trim(value):
-    if isinstance(value, list) and len(value) > MAX_LIST:
-        return value[:MAX_LIST] + [f"... {len(value) - MAX_LIST} more"]
+def trim(value, limit=MAX_LIST):
+    if isinstance(value, list) and len(value) > limit:
+        return value[:limit] + [f"... {len(value) - limit} more"]
     return value
 
 
@@ -48,7 +51,9 @@ def retrieve(question):
             rows = run(LOOKUPS[prefix], id=entity_id)
             first = rows[0] if rows else {}
             if first and list(first.values())[0] is not None:
-                facts.append({k: trim(v) for k, v in first.items()})
+                fact = {k: trim(v, MAX_PATHS if k == "paths" else MAX_LIST) for k, v in first.items()}
+                fact["counts"] = {k: len(v) for k, v in first.items() if isinstance(v, list)}
+                facts.append(fact)
             else:
                 missing.append(entity_id)
         return {"mode": "id_lookup", "ids": ids, "facts": facts, "not_found": missing}
@@ -65,9 +70,13 @@ def generate(question, retrieved):
         return None, "not configured (set GROQ_API_KEY)"
     try:
         client = Groq(api_key=config.GROQ_API_KEY)
+        # Minimal thinking, and don't send the reasoning text back: faster first token, smaller response.
+        reasoning = ({"reasoning_effort": config.GROQ_REASONING_EFFORT, "include_reasoning": False}
+                     if config.GROQ_REASONING_EFFORT else {})
         response = client.chat.completions.create(
             model=config.GROQ_MODEL,
             temperature=0.1,
+            **reasoning,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": f"Question: {question}\n\nFacts:\n{json.dumps(retrieved, default=str)}"},
