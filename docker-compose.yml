@@ -1,6 +1,6 @@
 # Full stack:  docker compose up --build
-#   frontend  http://localhost:3000
-#   backend   http://localhost:8000/docs
+#   frontend  https://rag-cyber-defense-ox4x.vercel.app
+#   backend   https://rag-cyber-defense.vercel.app
 #   neo4j     http://localhost:7474   (neo4j / password from .env)
 #
 # Settings come from .env (copy .env.example to .env first).
@@ -59,7 +59,7 @@ services:
       NEO4J_PASSWORD: ${NEO4J_PASSWORD:-password123}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
-      CORS_ORIGINS: http://localhost:3000
+      CORS_ORIGINS: https://rag-cyber-defense-ox4x.vercel.app,http://localhost:3000
     depends_on:
       neo4j:
         condition: service_healthy
@@ -68,7 +68,7 @@ services:
     build:
       context: ./frontend
       args:
-        NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_API_URL: https://rag-cyber-defense.vercel.app
     ports:
       - "3000:3000"
     depends_on:

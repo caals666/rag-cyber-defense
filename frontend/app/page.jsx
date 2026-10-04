@@ -4,7 +4,7 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://rag-cyber-defense.vercel.app";
 
 const EXAMPLES = [
   "Which ATT&CK techniques are reachable from CVE-2024-24919?",

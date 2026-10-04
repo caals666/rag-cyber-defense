@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # The browser calls the backend directly, so its URL is baked in at build time
-ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ARG NEXT_PUBLIC_API_URL=https://rag-cyber-defense.vercel.app
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
