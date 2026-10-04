@@ -1,0 +1,99 @@
+DATASET INSPECTION REPORT
+Source: data/raw/*.csv (all values read as text, then whitespace-normalized)
+
+==========================================================================================
+FILE: cve_dataset.csv
+Rows: 38,461   Columns: 9   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%    38461  IDENTIFIER (unique key)
+name                    object        38297    99.6%      150  attribute
+description             object            0     0.0%    36685  attribute
+base_score              float64           4     0.0%       85  attribute
+exploitability_score    float64         459     1.2%       24  attribute
+impact_score            float64         459     1.2%       16  attribute
+severity                object            4     0.0%        5  attribute
+published               object            0     0.0%      732  attribute
+related_cwe_ids         object         1689     4.4%     1530  RELATIONSHIP / reference column
+
+Sample rows (text truncated to 60 chars):
+               id  name                                                   description base_score exploitability_score impact_score  severity   published related_cwe_ids
+0  CVE-2024-21732  <NA>  FlyCms through abbaa5a allows XSS via the permission managem        6.1                  2.8          2.7    MEDIUM  2024-01-01          CWE-79
+1   CVE-2024-0181  <NA>  A vulnerability was found in RRJ Nueva Ecija Engineer Online        4.8                  1.7          2.7    MEDIUM  2024-01-01          CWE-79
+2   CVE-2024-0182  <NA>  A vulnerability was found in SourceCodester Engineers Online        9.8                  3.9          5.9  CRITICAL  2024-01-01          CWE-89
+3   CVE-2024-0183  <NA>  A vulnerability was found in RRJ Nueva Ecija Engineer Online        4.8                  1.7          2.7    MEDIUM  2024-01-01          CWE-80
+4   CVE-2024-0184  <NA>  A vulnerability was found in RRJ Nueva Ecija Engineer Online        4.8                  1.7          2.7    MEDIUM  2024-01-02          CWE-79
+
+==========================================================================================
+FILE: cwe_dataset.csv
+Rows: 944   Columns: 9   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%      944  IDENTIFIER (unique key)
+name                    object            0     0.0%      944  attribute
+category                object            0     0.0%        5  attribute
+description             object            0     0.0%      944  attribute
+likelihood              object          944   100.0%        0  attribute
+consequences            object            0     0.0%      192  attribute
+mitigations             object          273    28.9%      608  attribute
+child_of_ids            object           10     1.1%      339  RELATIONSHIP / reference column
+related_capec_ids       object          608    64.4%      258  RELATIONSHIP / reference column
+
+Sample rows (text truncated to 60 chars):
+      id                                                          name category                                                   description likelihood                                                  consequences                                                   mitigations child_of_ids  related_capec_ids
+0  CWE-5   J2EE Misconfiguration: Data Transmission Without Encryption  Variant  Information sent over a network can be compromised while in        <NA>  Confidentiality: Read Application Data | Integrity: Modify A  The product configuration should ensure that SSL or an encry      CWE-319               <NA>
+1  CWE-6         J2EE Misconfiguration: Insufficient Session-ID Length  Variant  The J2EE application is configured to use an insufficient se       <NA>            Access Control: Gain Privileges or Assume Identity  Session identifiers should be at least 128 bits long to prev      CWE-334  CAPEC-21;CAPEC-59
+2  CWE-7              J2EE Misconfiguration: Missing Custom Error Page  Variant  The default error page of a web application should not displ       <NA>                        Confidentiality: Read Application Data  Handle exceptions appropriately in source code. | Always def      CWE-756               <NA>
+3  CWE-8            J2EE Misconfiguration: Entity Bean Declared Remote  Variant  When an application exposes a remote interface for an entity       <NA>                        Confidentiality: Read Application Data  Declare Java beans local when possible. When a bean must be       CWE-668               <NA>
+4  CWE-9  J2EE Misconfiguration: Weak Access Permissions for EJB Metho  Variant  If elevated access rights are assigned to EJB methods, then        <NA>                                                  Other: Other  Follow the principle of least privilege when assigning acces      CWE-266               <NA>
+
+==========================================================================================
+FILE: capec_dataset.csv
+Rows: 559   Columns: 11   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%      559  IDENTIFIER (unique key)
+name                    object            0     0.0%      559  attribute
+category                object            0     0.0%        3  attribute
+description             object            2     0.4%      557  attribute
+likelihood              object          214    38.3%        3  attribute
+severity                object           70    12.5%        5  attribute
+mitigations             object          159    28.4%      376  attribute
+child_of_ids            object           60    10.7%      152  RELATIONSHIP / reference column
+can_precede_ids         object          479    85.7%       50  RELATIONSHIP / reference column
+related_cwe_ids         object          109    19.5%      270  RELATIONSHIP / reference column
+related_attack_ids      object          382    68.3%      138  RELATIONSHIP / reference column
+
+Sample rows (text truncated to 60 chars):
+          id                                                      name  category                                                   description likelihood   severity                                                   mitigations child_of_ids can_precede_ids                                               related_cwe_ids related_attack_ids
+0    CAPEC-1  Accessing Functionality Not Properly Constrained by ACLs  Standard  In applications, particularly web applications, access to fu       High       High  In a J2EE setting, administrators can associate a role that     CAPEC-122        CAPEC-17  CWE-276;CWE-285;CWE-434;CWE-693;CWE-732;CWE-1191;CWE-1193;CW          T1574.010
+1   CAPEC-10                 Buffer Overflow via Environment Variables  Detailed  This attack pattern involves causing a buffer overflow throu       High       High  Do not expose environment variable to the user. | Do not use    CAPEC-100            <NA>  CWE-120;CWE-302;CWE-118;CWE-119;CWE-74;CWE-99;CWE-20;CWE-680               <NA>
+2  CAPEC-100                                          Overflow Buffers  Standard  Buffer Overflow attacks target improper or missing bounds ch       High  Very High  Use a language or compiler that performs automatic bounds ch    CAPEC-123            <NA>               CWE-120;CWE-119;CWE-131;CWE-129;CWE-805;CWE-680               <NA>
+3  CAPEC-101                       Server Side Include (SSI) Injection  Detailed  An attacker can use Server Side Include (SSI) Injection to s       High       High  Set the OPTIONS IncludesNOEXEC in the global access.conf fil    CAPEC-253       CAPEC-600                                          CWE-97;CWE-74;CWE-20               <NA>
+4  CAPEC-102                                       Session Sidejacking  Detailed  Session sidejacking takes advantage of an unencrypted commun       High       High  Make sure that HTTPS is used to communicate with the target     CAPEC-593            <NA>                       CWE-294;CWE-522;CWE-523;CWE-319;CWE-614               <NA>
+
+==========================================================================================
+FILE: attack_dataset.csv
+Rows: 697   Columns: 8   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%      697  IDENTIFIER (unique key)
+name                    object            0     0.0%      672  attribute
+type                    object            0     0.0%        2  attribute
+category                object            0     0.0%       35  attribute
+description             object            0     0.0%      697  attribute
+platforms               object            0     0.0%      114  attribute
+mitigations             object          111    15.9%      296  attribute
+url                     object            0     0.0%      697  external reference (link, not an entity ID)
+
+Sample rows (text truncated to 60 chars):
+          id                               name           type             category                                                   description                 platforms                                                   mitigations                                            url
+0      T1001                   Data Obfuscation      technique  command-and-control  Adversaries may obfuscate command and control traffic to mak  ESXi;Linux;macOS;Windows                                  Network Intrusion Prevention      https://attack.mitre.org/techniques/T1001
+1  T1001.001                          Junk Data  sub-technique  command-and-control  Adversaries may add junk data to protocols used for command   ESXi;Linux;macOS;Windows                                  Network Intrusion Prevention  https://attack.mitre.org/techniques/T1001/001
+2  T1001.002                      Steganography  sub-technique  command-and-control  Adversaries may use steganographic techniques to hide comman  Linux;macOS;Windows;ESXi                                  Network Intrusion Prevention  https://attack.mitre.org/techniques/T1001/002
+3  T1001.003  Protocol or Service Impersonation  sub-technique  command-and-control  Adversaries may impersonate legitimate protocols or web serv  ESXi;Linux;macOS;Windows                                  Network Intrusion Prevention  https://attack.mitre.org/techniques/T1001/003
+4      T1003              OS Credential Dumping      technique    credential-access  Adversaries may attempt to dump credentials to obtain accoun       Linux;macOS;Windows  Active Directory Configuration | Behavior Prevention on Endp      https://attack.mitre.org/techniques/T1003

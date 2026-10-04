@@ -1,0 +1,48 @@
+DATA QUALITY REPORT
+
+1. SOURCE DATASETS (no records deleted; cleaning = whitespace + null normalization)
+dataset                 original   cleaned  dup ids  dup rows  bad id fmt  no id
+cve_dataset.csv            38461     38461        0         0           0      0
+cwe_dataset.csv              944       944        0         0           0      0
+capec_dataset.csv            559       559        0         0           0      0
+attack_dataset.csv           697       697        0         0           0      0
+
+2. RELATIONSHIPS
+resolved references = both endpoints exist; duplicates = the same edge listed more than once
+relationship       resolved refs  duplicates  valid edges  unresolved
+CVE_CWE                    40321           0        40321          71
+CWE_CHILD                   1086           0         1086           0
+CWE_CAPEC                   2426        1214         1212           0
+CAPEC_CHILD                  533           0          533           0
+CAN_PRECEDE                  162           0          162           0
+CAPEC_ATTACK                 256           0          256          15
+SUBTECHNIQUE_OF              475           0          475           0
+TOTAL                      45259        1214        44045          86
+CWE_CAPEC is recorded in both cwe_dataset.related_capec_ids and capec_dataset.related_cwe_ids;
+the two sides describe the same 1,212 edges, so each edge keeps both columns as evidence.
+
+Column with no usable data: cwe_dataset.likelihood is empty for all 944 rows (empty in the
+official MITRE CWE CSV itself), so no CWE likelihood feature is produced.
+
+3. UNRESOLVED REFERENCES (kept out of the graph, listed here instead of deleted)
+CAPEC_ATTACK: 15 references to 10 IDs absent from the datasets
+   T1513, T1562.001, T1562.002, T1562.003, T1562.004, T1562.006, T1562.007, T1562.008, T1562.009, T1574.002
+CVE_CWE: 71 references to 17 IDs absent from the datasets
+   CWE-16, CWE-199, CWE-21, CWE-227, CWE-255, CWE-264, CWE-265, CWE-275, CWE-310, CWE-320, CWE-371, CWE-399, CWE-592, CWE-701, CWE-702, CWE-840, CWE-92
+Reason: the missing CWE IDs are CWE categories, views or deprecated entries, which are not
+part of the CWE weakness list (view 1000). The missing ATT&CK IDs are not in the current
+Enterprise ATT&CK release (revoked/deprecated techniques, or another matrix, e.g. Mobile).
+
+4. FIFTH DATASET COVERAGE
+Path rows: 286,890   Unique CVEs: 38,461 (all 38,461 CVEs retained)
+  rows of type CVE_CWE_CAPEC            202,282
+  rows of type CVE_CWE_CAPEC_ATTACK      74,498
+  rows of type CVE_CWE                    8,365
+  rows of type CVE_ONLY                   1,745
+CVEs by deepest verified path:
+  depth 0 (CVE only): 1,745
+  depth 1 (reaches CWE): 6,616
+  depth 2 (reaches CAPEC): 19,751
+  depth 3 (reaches ATT&CK): 10,349
+Complete CVE-CWE-CAPEC-ATT&CK paths: 74,498 across 10,349 CVEs
+Duplicate path rows: 0

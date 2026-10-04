@@ -9,10 +9,17 @@
 !/frontend/
 !/neo4j/
 !/data/
+!/docs/
+!/.github/
+!/build_datasets.py
+!/build_attack_path_dataset.py
 
-# inside data/, keep only the four source datasets
+# inside data/, keep the four source datasets and the processed reports
 /data/*
 !/data/raw/
+!/data/processed/
+# 70 MB, regenerate with build_attack_path_dataset.py
+/data/processed/cyber_attack_path_dataset.csv
 
 # never commit
 .env

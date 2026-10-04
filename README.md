@@ -316,6 +316,16 @@ npm install
 npm run dev                          # http://localhost:3000
 ```
 
+### Loading the graph into Neo4j Aura (deployment)
+
+Aura cannot read local files, so `neo4j/load_remote.py` sends the CSV rows from your machine. Put the Aura `NEO4J_URI`, `NEO4J_USER` and `NEO4J_PASSWORD` in `.env`, then:
+
+```bash
+python neo4j/load_remote.py
+```
+
+It clears the target database first, then runs `schema.cypher`, `load_graph.cypher` and `vector_index.cypher`.
+
 ### Rebuilding the datasets (optional)
 
 The four CSVs are already in `data/raw/`. To regenerate them, download the sources and run `python build_datasets.py <raw_dir>`.
@@ -419,7 +429,7 @@ rag-cyber-defense/
 │   │   ├── attack_dataset.csv
 │   │   └── inspect_datasets.ipynb
 │   └── processed/                           fifth dataset and reports
-│       ├── cyber_attack_path_dataset.csv
+│       ├── cyber_attack_path_dataset.csv    (git-ignored, 70 MB; regenerate)
 │       ├── cyber_relationships.csv
 │       ├── dataset_inspection_report.txt
 │       ├── data_quality_report.txt
@@ -429,6 +439,7 @@ rag-cyber-defense/
 │   ├── schema.cypher                        1. constraints and indexes
 │   ├── load_graph.cypher                    2. nodes and relationships
 │   ├── vector_index.cypher                  3. vector indexes
+│   ├── load_remote.py                       runs 1-3 against Neo4j Aura from local CSVs
 │   └── example_queries.cypher               10 tested queries
 │
 ├── backend/                                 FastAPI
@@ -440,7 +451,8 @@ rag-cyber-defense/
 │   │   ├── connection.py                    Neo4j driver
 │   │   └── queries.py                       tested Cypher templates
 │   ├── rag/
-│   │   └── pipeline.py                      IDs -> Neo4j -> Groq answer
+│   │   ├── pipeline.py                      IDs -> Neo4j -> Groq answer
+│   │   └── prompts.py                       LLM prompt templates
 │   ├── api/
 │   │   └── routes.py                        /health, /cve/{id}, /ask
 │   └── retrieval/                (planned)  text-to-Cypher, vector, hybrid
