@@ -17,19 +17,31 @@ LOOKUPS = {"CVE": queries.CVE_CHAIN, "CWE": queries.CWE_CHAIN,
 MAX_LIST = 40  # cap long neighbour lists so the prompt stays small
 MAX_PATHS = 150  # paths are short strings, so keep more of them
 
-SYSTEM_PROMPT = """You are a cybersecurity analyst assistant.
-Answer ONLY from the JSON facts provided, which come from a Neo4j knowledge graph built from
-NVD CVE, MITRE CWE, MITRE CAPEC and MITRE ATT&CK data.
-Rules:
-- Never invent IDs, scores or relationships. If a link is not in the facts, it does not exist in the data.
-- Cite IDs in square brackets, e.g. [CVE-2024-24919], [CWE-200].
-- "paths" lists every real chain (e.g. "CWE-200 -> CAPEC-169 -> T1592"). Describe connections only from these.
-- "counts" holds the true number of items per list; lists may be cut short, so use counts for totals.
-- Structure the answer in three short sections:
-  **Retrieved facts** - what the graph returned.
-  **Attack-path analysis** - what the connections mean (counts, CWE -> CAPEC -> ATT&CK chains).
-  **Not available** - what was asked but is missing from the data.
-- If no facts were found, say so plainly."""
+SYSTEM_PROMPT = """You answer cybersecurity questions for people who are not security experts.
+Use ONLY the JSON facts given. They come from a knowledge graph that links CVE (a specific bug
+in real software), CWE (the type of mistake behind it), CAPEC (how attackers exploit it) and
+ATT&CK (what attackers do once they get in).
+
+How to answer:
+- Answer exactly what was asked, first. Match the length to the question: if a word or number
+  answers it, reply with just that plus a few words of meaning. Otherwise 1 to 3 short sentences, never more.
+- Write for someone with no security background. Use everyday words and say what things mean in
+  practice ("lets an attacker read passwords from the device"), not official titles. Mention an ID
+  only in brackets after the plain description, e.g. "leaking private information (CWE-200)".
+- No headings, bullet points, tables or bold text.
+- When there are many results, give the total from "counts" and name the 2 or 3 that matter most
+  to a defender: the most damaging (stealing logins, taking control, spreading), not just the first listed.
+- When it helps, end with what to do about it, using the "mitigations" or the description in the facts.
+- "paths" lists the real links (e.g. "CWE-200 -> CAPEC-169 -> T1592"). Describe connections only from these.
+- Never invent IDs, scores, counts, fixes or links. Lists may be cut short, so take totals from "counts".
+- If the facts do not answer the question or are unrelated to it, reply exactly:
+  "I don't have information about that in the security data." Never answer from your own knowledge.
+
+Examples of the style:
+Q: How severe is CVE-2024-24919?
+A: High, 8.6 out of 10. Attackers can read private information from the affected Check Point gateways over the internet.
+Q: What is CWE-89?
+A: A coding mistake where user input is mixed straight into database commands, so an attacker can read or change the data (SQL injection). Fix it by using parameterised queries."""
 
 
 def extract_ids(question):
@@ -70,19 +82,20 @@ def generate(question, retrieved):
         return None, "not configured (set GROQ_API_KEY)"
     try:
         client = Groq(api_key=config.GROQ_API_KEY)
-        # Minimal thinking, and don't send the reasoning text back: faster first token, smaller response.
+        # Configurable thinking, and don't send the reasoning text back: smaller, faster response.
         reasoning = ({"reasoning_effort": config.GROQ_REASONING_EFFORT, "include_reasoning": False}
                      if config.GROQ_REASONING_EFFORT else {})
-        response = client.chat.completions.create(
-            model=config.GROQ_MODEL,
-            temperature=0.1,
-            **reasoning,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"Question: {question}\n\nFacts:\n{json.dumps(retrieved, default=str)}"},
-            ],
-        )
-        return response.choices[0].message.content, config.GROQ_MODEL
+        messages = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": f"Question: {question}\n\nFacts:\n{json.dumps(retrieved, default=str)}"},
+        ]
+        for _ in range(2):  # the model occasionally returns an empty message; retry once
+            response = client.chat.completions.create(
+                model=config.GROQ_MODEL, temperature=0.1, messages=messages, **reasoning)
+            text = (response.choices[0].message.content or "").strip()
+            if text:
+                return text, config.GROQ_MODEL
+        return None, f"{config.GROQ_MODEL} returned an empty answer"
     except Exception as exc:
         return None, f"{config.GROQ_MODEL} failed: {exc}"
 

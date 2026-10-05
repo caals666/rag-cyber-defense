@@ -59,7 +59,7 @@ services:
       NEO4J_PASSWORD: ${NEO4J_PASSWORD:-password123}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
-      GROQ_REASONING_EFFORT: ${GROQ_REASONING_EFFORT-low}
+      GROQ_REASONING_EFFORT: ${GROQ_REASONING_EFFORT-medium}
       CORS_ORIGINS: https://rag-cyber-defense-ox4x.vercel.app,http://localhost:3000
     depends_on:
       neo4j:

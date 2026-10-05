@@ -283,7 +283,7 @@ The graph was loaded into Aura once with `python neo4j/load_remote.py`, because 
    - **ID found → direct lookup.** A tested Cypher template from `backend/graph/queries.py` walks CVE → CWE → CAPEC → ATT&CK and returns the records, every real chain as `paths` (for example `CWE-200 -> CAPEC-169 -> T1592`), and the true list sizes as `counts`.
    - **No ID → keyword search.** The `cyber_text` full-text index searches names and descriptions and returns the top 8 matches.
 3. **Trim.** Lists longer than 40 items (150 for paths) are cut and end with `"... N more"`, so the prompt stays small. `counts` still gives the real totals.
-4. **Generate.** The facts and the question go to Groq with a strict system prompt: use only these facts, never invent IDs or scores, cite IDs in brackets, and answer in three sections (Retrieved facts, Attack-path analysis, Not available). Temperature is 0.1 and reasoning effort is `low`.
+4. **Generate.** The facts and the question go to Groq with a strict system prompt: use only these facts and never invent IDs, scores or fixes. Answer in simple English for a non-technical reader, as short as the question allows (one word up to 3 sentences), name the 2–3 most damaging items when there are many, and end with what to do when it helps. Unrelated questions get "I don't have information about that in the security data." Temperature is 0.1 and reasoning effort is `medium`. The CVE lookup also sends the weakness's mitigations, so "how do I fix it?" has real material.
 5. **Return.** The API returns the answer and the raw facts together, so every claim can be checked.
 
 **`POST /ask` response:**
@@ -315,15 +315,25 @@ The graph was loaded into Aura once with `python neo4j/load_remote.py`, because 
 |---|---|
 | CVE-2024-24919 lookup | 1 CWE, 59 CAPECs, 25 ATT&CK techniques, 66 paths |
 | `/ask` end to end | about 3.7 s |
-| LLM time, reasoning `medium` → `low` | 0.9–1.1 s → 0.4–0.7 s |
-| Off-topic question ("Who won the 2023 cricket World Cup?") | says the data has no such information; nothing invented |
+| LLM time for a small answer, reasoning `medium` → `low` | 0.9–1.1 s → 0.4–0.7 s |
+| Off-topic question ("Who won the 2023 cricket World Cup?") | "I don't have information about that in the security data." |
+
+**Example answers** (current prompt):
+
+| Question | Answer |
+|---|---|
+| What is the severity of CVE-2024-24919? | High severity, with a CVSS base score of 8.6 out of 10. |
+| What is CWE-79? | A coding mistake where a program puts user-controlled data into a web page without properly cleaning it, letting an attacker inject malicious scripts that run in other users' browsers. Prevent it by using frameworks that encode output and by validating all untrusted input. |
+| How do I fix CVE-2024-24919? | Install the Check Point security update that patches the information-disclosure bug, then keep the remote-access VPN in a segmented zone with minimum privileges. |
+| Is CVE-2024-99999 dangerous? | I don't have information about that in the security data. |
 
 **Problems we hit and how we fixed them:**
 
 | Problem | Fix |
 |---|---|
 | The LLM said "26 techniques" when there were 25, and invented direct CVE → technique links | Return `paths` (each real chain) and `counts` (true totals), and tell the LLM to use only those |
-| Answers were slow | Lowest reasoning effort for gpt-oss (`low`) and no reasoning text returned: about 2× faster |
+| Answers were slow | No reasoning text returned, and reasoning effort made a setting (`low` is about 2× faster; `medium`, the default, gives better answers) |
+| Answers were long and technical | Rewrote the prompt: simple English, length matched to the question, most damaging items first, the fix at the end; added mitigations to the CVE lookup |
 | Deployed backend tried `localhost:7687` | Moved the graph to Neo4j AuraDB and set the `NEO4J_*` variables on Vercel |
 | Aura cannot read `file:///` CSVs, and the GitHub repo is private | `neo4j/load_remote.py` reads the CSVs locally and sends the rows in batches of 2,000 |
 | `CERTIFICATE_VERIFY_FAILED` on Windows | The Windows certificate store lacked Aura's root CA; the loader verifies with `certifi`'s CA bundle |
@@ -332,7 +342,8 @@ The graph was loaded into Aura once with `python neo4j/load_remote.py`, because 
 **Known limitations:**
 
 - Questions without an ID always pull in 8 loosely matching records, which adds noise to off-topic answers.
-- The LLM sometimes skips the `[ID]` citation format.
+- Some answers still use official technique names (for example "Token Impersonation/Theft").
+- Groq response time varies: from under 1 s to about 25 s for the same kind of question.
 - CVEs cover 2024 only.
 - Embeddings are not written yet, so the vector indexes exist but return nothing.
 - No authentication, automated tests or benchmark yet.
@@ -500,7 +511,7 @@ RETURN c.id, c.name, c.base_score ORDER BY c.base_score DESC LIMIT 20
 | Data processing | Python, pandas, `json`, `csv`, `re` |
 | Graph database | Neo4j 5 (Docker locally, AuraDB Free in production), Cypher |
 | Embeddings | `sentence-transformers` (all-MiniLM-L6-v2), Neo4j vector index |
-| LLM | Groq API, model `openai/gpt-oss-120b`, reasoning effort `low` (configurable via `GROQ_MODEL`, `GROQ_REASONING_EFFORT`) |
+| LLM | Groq API, model `openai/gpt-oss-120b`, reasoning effort `medium` (configurable via `GROQ_MODEL`, `GROQ_REASONING_EFFORT`) |
 | Backend | FastAPI, Neo4j Python driver |
 | Frontend | Next.js 15, Supabase auth (planned), react-force-graph (planned) |
 | Hosting | Vercel (frontend and backend), Neo4j AuraDB Free (graph) |
@@ -629,7 +640,8 @@ rag-cyber-defense/
 - [x] Answers with citations
 - [x] Handle "no information found"
 - [x] Real attack paths and true counts in the context (fixes miscounting)
-- [x] Low reasoning effort for faster answers
+- [x] Configurable reasoning effort (speed vs answer quality)
+- [x] Short, simple-English answers for non-technical readers
 - [ ] Context cleaning and token limits for very large results
 
 **Phase 6 — Application**
@@ -674,13 +686,16 @@ Standard RAG returns text chunks that look similar to the question. GraphRAG ret
 Regex finds the IDs → a fixed Cypher template fetches the chain from Neo4j → lists are trimmed and counts added → the facts and the question go to Groq with strict rules → the answer and the raw facts come back together. With no ID, the full-text index finds the closest records instead. See [How a Question Is Answered Today](#how-a-question-is-answered-today).
 
 **How do you stop hallucinations?**
-The LLM never writes queries and never sees anything except retrieved facts. The system prompt forbids inventing IDs or links. We pass every real chain (`paths`) and the true totals (`counts`) so it does not have to guess. Temperature is 0.1. Missing IDs are listed in `not_found`, and the answer has a "Not available" section. Off-topic questions get "not in the data".
+The LLM never writes queries and never sees anything except retrieved facts. The system prompt forbids inventing IDs or links. We pass every real chain (`paths`) and the true totals (`counts`) so it does not have to guess. Temperature is 0.1. Missing IDs are listed in `not_found`. If the facts do not answer the question, the LLM must reply "I don't have information about that in the security data." instead of using its own knowledge.
+
+**Who are the answers written for?**
+Non-technical readers. The answer is as short as the question allows (one word up to 3 sentences), uses everyday words, names only the 2–3 most damaging items, and ends with what to do. The exact IDs and records are listed under the answer as sources.
 
 **Why doesn't the LLM write the Cypher?**
 Fixed, tested templates are always correct and cannot run harmful queries. Text-to-Cypher (the LLM writes the query) is planned for relationship questions that the templates do not cover, and its accuracy will be measured in the evaluation.
 
 **Which LLM do you use, and why Groq?**
-`openai/gpt-oss-120b`, an open-weight model, served by Groq because its inference is very fast and it has a free tier. We set reasoning effort to `low`, which roughly halved LLM time (0.9–1.1 s → 0.4–0.7 s). The model is a setting, so it can be swapped.
+`openai/gpt-oss-120b`, an open-weight model, served by Groq because its inference is very fast and it has a free tier. Reasoning effort is a setting: `low` roughly halves LLM time (0.9–1.1 s → 0.4–0.7 s), and `medium` (our default) gives better answers. The model is a setting too, so it can be swapped.
 
 **How did you build the datasets?**
 `build_datasets.py` parses the raw NVD JSON and MITRE CSV/JSON, drops rejected CVEs and deprecated or retired entries, keeps the English description and main CVSS score, removes backslashes and quotes (they break Neo4j's CSV loader), and turns MITRE's `::KEY:value::` links into `;`-separated ID lists.
@@ -704,7 +719,7 @@ An embedding turns text into 384 numbers (model all-MiniLM-L6-v2) so that simila
 Frontend and backend on Vercel, graph on Neo4j AuraDB Free, LLM on Groq, connected by environment variables. CORS allows only the frontend to call the API. Locally, `docker compose up` runs the whole stack. See [Live Deployment](#live-deployment).
 
 **What problems did you face?**
-The LLM miscounted and invented links (fixed with `paths` and `counts`), answers were slow (reasoning effort `low`), the deployed backend had no database (moved to Aura), Aura cannot read local files (wrote `load_remote.py`), and Windows failed the TLS check (verified with `certifi`). See the table in [How a Question Is Answered Today](#how-a-question-is-answered-today).
+The LLM miscounted and invented links (fixed with `paths` and `counts`), answers were slow (made reasoning effort a setting), answers were long and technical (rewrote the prompt for short, simple English), the deployed backend had no database (moved to Aura), Aura cannot read local files (wrote `load_remote.py`), and Windows failed the TLS check (verified with `certifi`). See the table in [How a Question Is Answered Today](#how-a-question-is-answered-today).
 
 **What does your project add to the paper?**
 Measured results (the paper has none), retrieval that works without an ID (keyword search now, hybrid next), and a deployed web app instead of a notebook.
