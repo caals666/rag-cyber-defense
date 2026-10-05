@@ -4,8 +4,8 @@ Aura cannot read file:/// paths, so this runs the same three .cypher files but
 sends the CSV rows from this machine: each `LOAD CSV ... FROM 'file:///x.csv' AS row`
 becomes `UNWIND $rows AS row`, fed in batches.
 
-    pip install neo4j
-    # put NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD in .env (repo root)
+    pip install neo4j certifi
+    # put NEO4J_URI, NEO4J_USER (or NEO4J_USERNAME), NEO4J_PASSWORD in .env (repo root)
     python neo4j/load_remote.py
 
 WARNING: load_graph.cypher clears the target database first.
@@ -17,7 +17,8 @@ import sys
 import time
 from pathlib import Path
 
-from neo4j import GraphDatabase
+import certifi
+from neo4j import GraphDatabase, TrustCustomCAs
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "raw"
@@ -53,15 +54,22 @@ def load_rows(name):
 
 def main():
     read_env()
-    uri, user, password = (os.getenv(k) for k in ("NEO4J_URI", "NEO4J_USER", "NEO4J_PASSWORD"))
+    uri, password = os.getenv("NEO4J_URI"), os.getenv("NEO4J_PASSWORD")
+    user = os.getenv("NEO4J_USER") or os.getenv("NEO4J_USERNAME") or "neo4j"  # Aura's file says USERNAME
     if not uri or "localhost" in uri or not password:
         sys.exit("Set NEO4J_URI (neo4j+s://...), NEO4J_USER and NEO4J_PASSWORD in .env first.")
 
+    # Verify Aura's certificate against certifi's CA bundle: the Windows store can lack its root CA.
+    options = {}
+    if "+s://" in uri:
+        uri = uri.replace("+s://", "://")
+        options = {"encrypted": True, "trusted_certificates": TrustCustomCAs(certifi.where())}
+
     cache = {}
-    with GraphDatabase.driver(uri, auth=(user or "neo4j", password)) as driver:
+    with GraphDatabase.driver(uri, auth=(user, password), **options) as driver:
         driver.verify_connectivity()
         print(f"Connected to {uri}")
-        with driver.session() as session:
+        with driver.session(database=os.getenv("NEO4J_DATABASE") or None) as session:
             for file in FILES:
                 for i, stmt in enumerate(statements(ROOT / "neo4j" / file), 1):
                     start = time.time()
