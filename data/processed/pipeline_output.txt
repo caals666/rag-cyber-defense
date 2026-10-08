@@ -1,0 +1,215 @@
+DATASET INSPECTION REPORT
+Source: data/raw/*.csv (all values read as text, then whitespace-normalized)
+
+==========================================================================================
+FILE: cve_dataset.csv
+Rows: 38,461   Columns: 9   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%    38461  IDENTIFIER (unique key)
+name                    object        38297    99.6%      150  attribute
+description             object            0     0.0%    36685  attribute
+base_score              float64           4     0.0%       85  attribute
+exploitability_score    float64         459     1.2%       24  attribute
+impact_score            float64         459     1.2%       16  attribute
+severity                object            4     0.0%        5  attribute
+published               object            0     0.0%      732  attribute
+related_cwe_ids         object         1689     4.4%     1530  RELATIONSHIP / reference column
+
+Sample rows (text truncated to 60 chars):
+               id  name                                                   description base_score exploitability_score impact_score  severity   published related_cwe_ids
+0  CVE-2024-21732  <NA>  FlyCms through abbaa5a allows XSS via the permission managem        6.1                  2.8          2.7    MEDIUM  2024-01-01          CWE-79
+1   CVE-2024-0181  <NA>  A vulnerability was found in RRJ Nueva Ecija Engineer Online        4.8                  1.7          2.7    MEDIUM  2024-01-01          CWE-79
+2   CVE-2024-0182  <NA>  A vulnerability was found in SourceCodester Engineers Online        9.8                  3.9          5.9  CRITICAL  2024-01-01          CWE-89
+3   CVE-2024-0183  <NA>  A vulnerability was found in RRJ Nueva Ecija Engineer Online        4.8                  1.7          2.7    MEDIUM  2024-01-01          CWE-80
+4   CVE-2024-0184  <NA>  A vulnerability was found in RRJ Nueva Ecija Engineer Online        4.8                  1.7          2.7    MEDIUM  2024-01-02          CWE-79
+
+==========================================================================================
+FILE: cwe_dataset.csv
+Rows: 944   Columns: 9   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%      944  IDENTIFIER (unique key)
+name                    object            0     0.0%      944  attribute
+category                object            0     0.0%        5  attribute
+description             object            0     0.0%      944  attribute
+likelihood              object          944   100.0%        0  attribute
+consequences            object            0     0.0%      192  attribute
+mitigations             object          273    28.9%      608  attribute
+child_of_ids            object           10     1.1%      339  RELATIONSHIP / reference column
+related_capec_ids       object          608    64.4%      258  RELATIONSHIP / reference column
+
+Sample rows (text truncated to 60 chars):
+      id                                                          name category                                                   description likelihood                                                  consequences                                                   mitigations child_of_ids  related_capec_ids
+0  CWE-5   J2EE Misconfiguration: Data Transmission Without Encryption  Variant  Information sent over a network can be compromised while in        <NA>  Confidentiality: Read Application Data | Integrity: Modify A  The product configuration should ensure that SSL or an encry      CWE-319               <NA>
+1  CWE-6         J2EE Misconfiguration: Insufficient Session-ID Length  Variant  The J2EE application is configured to use an insufficient se       <NA>            Access Control: Gain Privileges or Assume Identity  Session identifiers should be at least 128 bits long to prev      CWE-334  CAPEC-21;CAPEC-59
+2  CWE-7              J2EE Misconfiguration: Missing Custom Error Page  Variant  The default error page of a web application should not displ       <NA>                        Confidentiality: Read Application Data  Handle exceptions appropriately in source code. | Always def      CWE-756               <NA>
+3  CWE-8            J2EE Misconfiguration: Entity Bean Declared Remote  Variant  When an application exposes a remote interface for an entity       <NA>                        Confidentiality: Read Application Data  Declare Java beans local when possible. When a bean must be       CWE-668               <NA>
+4  CWE-9  J2EE Misconfiguration: Weak Access Permissions for EJB Metho  Variant  If elevated access rights are assigned to EJB methods, then        <NA>                                                  Other: Other  Follow the principle of least privilege when assigning acces      CWE-266               <NA>
+
+==========================================================================================
+FILE: capec_dataset.csv
+Rows: 559   Columns: 11   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%      559  IDENTIFIER (unique key)
+name                    object            0     0.0%      559  attribute
+category                object            0     0.0%        3  attribute
+description             object            2     0.4%      557  attribute
+likelihood              object          214    38.3%        3  attribute
+severity                object           70    12.5%        5  attribute
+mitigations             object          159    28.4%      376  attribute
+child_of_ids            object           60    10.7%      152  RELATIONSHIP / reference column
+can_precede_ids         object          479    85.7%       50  RELATIONSHIP / reference column
+related_cwe_ids         object          109    19.5%      270  RELATIONSHIP / reference column
+related_attack_ids      object          382    68.3%      138  RELATIONSHIP / reference column
+
+Sample rows (text truncated to 60 chars):
+          id                                                      name  category                                                   description likelihood   severity                                                   mitigations child_of_ids can_precede_ids                                               related_cwe_ids related_attack_ids
+0    CAPEC-1  Accessing Functionality Not Properly Constrained by ACLs  Standard  In applications, particularly web applications, access to fu       High       High  In a J2EE setting, administrators can associate a role that     CAPEC-122        CAPEC-17  CWE-276;CWE-285;CWE-434;CWE-693;CWE-732;CWE-1191;CWE-1193;CW          T1574.010
+1   CAPEC-10                 Buffer Overflow via Environment Variables  Detailed  This attack pattern involves causing a buffer overflow throu       High       High  Do not expose environment variable to the user. | Do not use    CAPEC-100            <NA>  CWE-120;CWE-302;CWE-118;CWE-119;CWE-74;CWE-99;CWE-20;CWE-680               <NA>
+2  CAPEC-100                                          Overflow Buffers  Standard  Buffer Overflow attacks target improper or missing bounds ch       High  Very High  Use a language or compiler that performs automatic bounds ch    CAPEC-123            <NA>               CWE-120;CWE-119;CWE-131;CWE-129;CWE-805;CWE-680               <NA>
+3  CAPEC-101                       Server Side Include (SSI) Injection  Detailed  An attacker can use Server Side Include (SSI) Injection to s       High       High  Set the OPTIONS IncludesNOEXEC in the global access.conf fil    CAPEC-253       CAPEC-600                                          CWE-97;CWE-74;CWE-20               <NA>
+4  CAPEC-102                                       Session Sidejacking  Detailed  Session sidejacking takes advantage of an unencrypted commun       High       High  Make sure that HTTPS is used to communicate with the target     CAPEC-593            <NA>                       CWE-294;CWE-522;CWE-523;CWE-319;CWE-614               <NA>
+
+==========================================================================================
+FILE: attack_dataset.csv
+Rows: 697   Columns: 8   Fully duplicated rows: 0
+Duplicate values in 'id': 0
+
+column                  dtype       missing  missing%   unique  role
+id                      object            0     0.0%      697  IDENTIFIER (unique key)
+name                    object            0     0.0%      672  attribute
+type                    object            0     0.0%        2  attribute
+category                object            0     0.0%       35  attribute
+description             object            0     0.0%      697  attribute
+platforms               object            0     0.0%      114  attribute
+mitigations             object          111    15.9%      296  attribute
+url                     object            0     0.0%      697  external reference (link, not an entity ID)
+
+Sample rows (text truncated to 60 chars):
+          id                               name           type             category                                                   description                 platforms                                                   mitigations                                            url
+0      T1001                   Data Obfuscation      technique  command-and-control  Adversaries may obfuscate command and control traffic to mak  ESXi;Linux;macOS;Windows                                  Network Intrusion Prevention      https://attack.mitre.org/techniques/T1001
+1  T1001.001                          Junk Data  sub-technique  command-and-control  Adversaries may add junk data to protocols used for command   ESXi;Linux;macOS;Windows                                  Network Intrusion Prevention  https://attack.mitre.org/techniques/T1001/001
+2  T1001.002                      Steganography  sub-technique  command-and-control  Adversaries may use steganographic techniques to hide comman  Linux;macOS;Windows;ESXi                                  Network Intrusion Prevention  https://attack.mitre.org/techniques/T1001/002
+3  T1001.003  Protocol or Service Impersonation  sub-technique  command-and-control  Adversaries may impersonate legitimate protocols or web serv  ESXi;Linux;macOS;Windows                                  Network Intrusion Prevention  https://attack.mitre.org/techniques/T1001/003
+4      T1003              OS Credential Dumping      technique    credential-access  Adversaries may attempt to dump credentials to obtain accoun       Linux;macOS;Windows  Active Directory Configuration | Behavior Prevention on Endp      https://attack.mitre.org/techniques/T1003
+
+DATA QUALITY REPORT
+
+1. SOURCE DATASETS (no records deleted; cleaning = whitespace + null normalization)
+dataset                 original   cleaned  dup ids  dup rows  bad id fmt  no id
+cve_dataset.csv            38461     38461        0         0           0      0
+cwe_dataset.csv              944       944        0         0           0      0
+capec_dataset.csv            559       559        0         0           0      0
+attack_dataset.csv           697       697        0         0           0      0
+
+2. RELATIONSHIPS
+resolved references = both endpoints exist; duplicates = the same edge listed more than once
+relationship       resolved refs  duplicates  valid edges  unresolved
+CVE_CWE                    40321           0        40321          71
+CWE_CHILD                   1086           0         1086           0
+CWE_CAPEC                   2426        1214         1212           0
+CAPEC_CHILD                  533           0          533           0
+CAN_PRECEDE                  162           0          162           0
+CAPEC_ATTACK                 256           0          256          15
+SUBTECHNIQUE_OF              475           0          475           0
+TOTAL                      45259        1214        44045          86
+CWE_CAPEC is recorded in both cwe_dataset.related_capec_ids and capec_dataset.related_cwe_ids;
+the two sides describe the same 1,212 edges, so each edge keeps both columns as evidence.
+
+Column with no usable data: cwe_dataset.likelihood is empty for all 944 rows (empty in the
+official MITRE CWE CSV itself), so no CWE likelihood feature is produced.
+
+3. UNRESOLVED REFERENCES (kept out of the graph, listed here instead of deleted)
+CAPEC_ATTACK: 15 references to 10 IDs absent from the datasets
+   T1513, T1562.001, T1562.002, T1562.003, T1562.004, T1562.006, T1562.007, T1562.008, T1562.009, T1574.002
+CVE_CWE: 71 references to 17 IDs absent from the datasets
+   CWE-16, CWE-199, CWE-21, CWE-227, CWE-255, CWE-264, CWE-265, CWE-275, CWE-310, CWE-320, CWE-371, CWE-399, CWE-592, CWE-701, CWE-702, CWE-840, CWE-92
+Reason: the missing CWE IDs are CWE categories, views or deprecated entries, which are not
+part of the CWE weakness list (view 1000). The missing ATT&CK IDs are not in the current
+Enterprise ATT&CK release (revoked/deprecated techniques, or another matrix, e.g. Mobile).
+
+4. FIFTH DATASET COVERAGE
+Path rows: 286,890   Unique CVEs: 38,461 (all 38,461 CVEs retained)
+  rows of type CVE_CWE_CAPEC            202,282
+  rows of type CVE_CWE_CAPEC_ATTACK      74,498
+  rows of type CVE_CWE                    8,365
+  rows of type CVE_ONLY                   1,745
+CVEs by deepest verified path:
+  depth 0 (CVE only): 1,745
+  depth 1 (reaches CWE): 6,616
+  depth 2 (reaches CAPEC): 19,751
+  depth 3 (reaches ATT&CK): 10,349
+Complete CVE-CWE-CAPEC-ATT&CK paths: 74,498 across 10,349 CVEs
+Duplicate path rows: 0
+
+
+FINAL DATASET: data/processed/cyber_attack_path_dataset.csv
+rows=286,890 columns=33
+
+column / dtype / missing
+  path_id                     str              0
+  path_type                   str              0
+  path_depth                  int64            0
+  cve_id                      str              0
+  cve_name                    str         285760
+  cve_base_score              float64         69
+  cve_severity                str             69
+  cve_exploitability_score    float64       4017
+  cve_impact_score            float64       4017
+  cve_published               str              0
+  cwe_id                      str           1745
+  cwe_name                    str           1745
+  cwe_category                str           1745
+  capec_id                    str          10110
+  capec_name                  str          10110
+  capec_category              str          10110
+  capec_likelihood            str          72847
+  capec_severity              str          27800
+  attack_id                   str         212392
+  attack_name                 str         212392
+  attack_type                 str         212392
+  attack_tactics              str         212392
+  has_cwe                     bool             0
+  has_capec                   bool             0
+  has_attack                  bool             0
+  cve_cwe_count               int64            0
+  cve_capec_count             int64            0
+  cve_attack_count            int64            0
+  cve_path_count              int64            0
+  cve_max_path_depth          int64            0
+  cve_mapping_completeness    float64          0
+  cwe_capec_count             Int64         1745
+  capec_attack_count          Int64        10110
+
+10 representative rows (key columns):
+path_id            path_type        cve_id  cve_base_score   cwe_id  capec_id attack_id                                   attack_tactics  cve_path_count
+P000001 CVE_CWE_CAPEC_ATTACK CVE-2024-0001             9.8 CWE-1188 CAPEC-665     T1211                                          stealth               3
+P000002 CVE_CWE_CAPEC_ATTACK CVE-2024-0001             9.8 CWE-1188 CAPEC-665 T1542.002                              stealth;persistence               3
+P000003 CVE_CWE_CAPEC_ATTACK CVE-2024-0001             9.8 CWE-1188 CAPEC-665     T1556 defense-impairment;persistence;credential-access               3
+P000004 CVE_CWE_CAPEC_ATTACK CVE-2024-0002             9.8  CWE-287 CAPEC-114     T1548                             privilege-escalation              12
+P000006        CVE_CWE_CAPEC CVE-2024-0002             9.8  CWE-287 CAPEC-151       NaN                                              NaN              12
+P000007        CVE_CWE_CAPEC CVE-2024-0002             9.8  CWE-287 CAPEC-194       NaN                                              NaN              12
+P000039              CVE_CWE CVE-2024-0008             8.8  CWE-613       NaN       NaN                                              NaN               1
+P000098              CVE_CWE CVE-2024-0015             7.8  CWE-280       NaN       NaN                                              NaN               1
+P000980             CVE_ONLY CVE-2024-0103             6.5      NaN       NaN       NaN                                              NaN               0
+P001240             CVE_ONLY CVE-2024-0139             4.4      NaN       NaN       NaN                                              NaN               0
+
+Descriptive statistics:
+       path_depth  cve_base_score  cve_exploitability_score  cve_impact_score  cve_cwe_count  cve_capec_count  cve_attack_count  cve_path_count  cve_max_path_depth  cve_mapping_completeness  cwe_capec_count  capec_attack_count
+count   286890.00       286821.00                 282873.00         282873.00      286890.00        286890.00         286890.00       286890.00           286890.00                 286890.00         285145.0            276780.0
+mean         2.22            6.86                      2.78              3.91           1.21            25.25              8.26           28.41                2.58                      0.86            24.18                0.55
+std          0.52            1.72                      0.95              1.60           0.47            23.20             10.12           25.58                0.57                      0.19            22.63                1.06
+min          0.00            0.00                      0.30              0.00           0.00             0.00              0.00            0.00                0.00                      0.00              0.0                 0.0
+25%          2.00            5.40                      2.10              2.70           1.00             6.00              0.00            6.00                2.00                      0.67              6.0                 0.0
+50%          2.00            6.50                      2.80              3.60           1.00            13.00              4.00           15.00                3.00                      1.00             13.0                 0.0
+75%          3.00            8.00                      3.90              5.90           1.00            51.00             19.00           53.00                3.00                      1.00             51.0                 1.0
+max          3.00           10.00                      3.90              6.00           7.00           107.00             44.00          120.00                3.00                      1.00             59.0                 7.0
+unique CVE      38,461
+unique CWE         545
+unique CAPEC       437
+unique ATTACK      164

@@ -7,9 +7,11 @@ OPTIONAL MATCH (w)-[:CWE_CAPEC]->(p:CAPEC)
 OPTIONAL MATCH (p)-[:CAPEC_ATTACK]->(t:ATTACK)
 RETURN c {.id, .name, .description, .base_score, .severity, .exploitability_score,
           .impact_score, .path_count, .max_path_depth, published: toString(c.published)} AS cve,
-       collect(DISTINCT w {.id, .name, .category}) AS cwes,
+       collect(DISTINCT w {.id, .name, .category, mitigations: left(w.mitigations, 600)}) AS cwes,
        collect(DISTINCT p {.id, .name, .likelihood, .severity}) AS capecs,
-       collect(DISTINCT t {.id, .name, tactics: t.category}) AS techniques
+       collect(DISTINCT t {.id, .name, tactics: t.category}) AS techniques,
+       // each real chain, e.g. "CWE-200 -> CAPEC-169 -> T1592", so the LLM sees which link leads where
+       collect(DISTINCT w.id + coalesce(' -> ' + p.id, '') + coalesce(' -> ' + t.id, '')) AS paths
 """
 
 CWE_CHAIN = """
@@ -17,8 +19,9 @@ MATCH (w:CWE {id: $id})
 OPTIONAL MATCH (w)-[:CWE_CAPEC]->(p:CAPEC)
 OPTIONAL MATCH (p)-[:CAPEC_ATTACK]->(t:ATTACK)
 WITH w, collect(DISTINCT p {.id, .name, .likelihood, .severity}) AS capecs,
-     collect(DISTINCT t {.id, .name, tactics: t.category}) AS techniques
-RETURN w {.id, .name, .category, .description, .mitigations} AS cwe, capecs, techniques,
+     collect(DISTINCT t {.id, .name, tactics: t.category}) AS techniques,
+     collect(DISTINCT p.id + coalesce(' -> ' + t.id, '')) AS paths
+RETURN w {.id, .name, .category, .description, .mitigations} AS cwe, capecs, techniques, paths,
        COUNT { (:CVE)-[:CVE_CWE]->(w) } AS cve_count
 """
 
