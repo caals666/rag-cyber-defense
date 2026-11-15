@@ -7,10 +7,12 @@ from fastapi.middleware.cors import CORSMiddleware
 import config
 from api.routes import router
 from graph.connection import driver
+from rag import embeddings
 
 
 @asynccontextmanager
 async def lifespan(app):
+    embeddings.load()  # load the search-by-meaning model once, if it is installed
     yield
     driver.close()
 

@@ -1,0 +1,4 @@
+# Only for Docker (too big for Vercel, which falls back to keyword search):
+# search by meaning with all-MiniLM-L6-v2, plus pytest for the tests
+sentence-transformers>=3.0
+pytest>=8.0

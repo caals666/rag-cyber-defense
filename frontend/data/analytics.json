@@ -1,0 +1,522 @@
+{
+  "built_at": "2026-11-11 11:30",
+  "kev_version": "2026.11.10",
+  "nodes": {
+    "CVE": 38461,
+    "CWE": 944,
+    "CAPEC": 559,
+    "ATTACK": 697
+  },
+  "links": 44045,
+  "funnel": {
+    "all": 38461,
+    "cwe": 36716,
+    "capec": 30100,
+    "attack": 10349
+  },
+  "severity": [
+    {
+      "severity": "MEDIUM",
+      "n": 19089
+    },
+    {
+      "severity": "CRITICAL",
+      "n": 4939
+    },
+    {
+      "severity": "HIGH",
+      "n": 13596
+    },
+    {
+      "severity": "LOW",
+      "n": 832
+    },
+    {
+      "severity": "NONE",
+      "n": 5
+    }
+  ],
+  "monthly": [
+    {
+      "month": "2024-01",
+      "n": 1130
+    },
+    {
+      "month": "2024-02",
+      "n": 1734
+    },
+    {
+      "month": "2024-03",
+      "n": 2613
+    },
+    {
+      "month": "2024-04",
+      "n": 3133
+    },
+    {
+      "month": "2024-05",
+      "n": 3323
+    },
+    {
+      "month": "2024-06",
+      "n": 2684
+    },
+    {
+      "month": "2024-07",
+      "n": 2858
+    },
+    {
+      "month": "2024-08",
+      "n": 2681
+    },
+    {
+      "month": "2024-09",
+      "n": 2394
+    },
+    {
+      "month": "2024-10",
+      "n": 3350
+    },
+    {
+      "month": "2024-11",
+      "n": 3750
+    },
+    {
+      "month": "2024-12",
+      "n": 3010
+    }
+  ],
+  "top_cwes": [
+    {
+      "id": "CWE-79",
+      "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "n": 7929,
+      "avg_score": 5.8
+    },
+    {
+      "id": "CWE-89",
+      "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "n": 2813,
+      "avg_score": 8.5
+    },
+    {
+      "id": "CWE-862",
+      "name": "Missing Authorization",
+      "n": 1578,
+      "avg_score": 6.2
+    },
+    {
+      "id": "CWE-787",
+      "name": "Out-of-bounds Write",
+      "n": 1550,
+      "avg_score": 7.9
+    },
+    {
+      "id": "CWE-352",
+      "name": "Cross-Site Request Forgery (CSRF)",
+      "n": 1498,
+      "avg_score": 6.4
+    },
+    {
+      "id": "CWE-22",
+      "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "n": 1039,
+      "avg_score": 7.4
+    },
+    {
+      "id": "CWE-125",
+      "name": "Out-of-bounds Read",
+      "n": 995,
+      "avg_score": 6.6
+    },
+    {
+      "id": "CWE-416",
+      "name": "Use After Free",
+      "n": 941,
+      "avg_score": 7.7
+    },
+    {
+      "id": "CWE-476",
+      "name": "NULL Pointer Dereference",
+      "n": 890,
+      "avg_score": 5.8
+    },
+    {
+      "id": "CWE-94",
+      "name": "Improper Control of Generation of Code ('Code Injection')",
+      "n": 864,
+      "avg_score": 8.0
+    }
+  ],
+  "tactics": [
+    {
+      "tactic": "stealth",
+      "n": 8300
+    },
+    {
+      "tactic": "credential-access",
+      "n": 5688
+    },
+    {
+      "tactic": "execution",
+      "n": 4603
+    },
+    {
+      "tactic": "persistence",
+      "n": 3581
+    },
+    {
+      "tactic": "defense-impairment",
+      "n": 3535
+    },
+    {
+      "tactic": "privilege-escalation",
+      "n": 3503
+    },
+    {
+      "tactic": "lateral-movement",
+      "n": 2591
+    },
+    {
+      "tactic": "discovery",
+      "n": 2178
+    },
+    {
+      "tactic": "impact",
+      "n": 1335
+    },
+    {
+      "tactic": "collection",
+      "n": 1318
+    }
+  ],
+  "fix_first": [
+    {
+      "id": "CVE-2024-22216",
+      "name": "In default installations of Microchip maxView Storage Manager (for Adaptec Smart Storage Controllers) where Re",
+      "severity": "CRITICAL",
+      "base": 10.0,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 100.0,
+      "kev": false,
+      "rank": 1,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0242",
+      "name": "Under certain circumstances IQ Panel4 and IQ4 Hub panel software prior to version 4.4.2 could allow unauthoriz",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 25,
+      "score": 98.0,
+      "kev": false,
+      "rank": 2,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0412",
+      "name": "A vulnerability was found in DeShang DSShop up to 3.1.0. It has been declared as problematic. This vulnerabili",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 3,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0413",
+      "name": "A vulnerability was found in DeShang DSKMS up to 3.1.2. It has been rated as problematic. This issue affects s",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 4,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0414",
+      "name": "A vulnerability classified as problematic has been found in DeShang DSCMS up to 3.1.2/7.1. Affected is an unkn",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 5,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0415",
+      "name": "A vulnerability classified as critical was found in DeShang DSMall up to 6.1.0. Affected by this vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 6,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0642",
+      "name": "Inadequate access control in the C21 Live Encoder and Live Mosaic product, version 5.3. This vulnerability all",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 7,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0712",
+      "name": "A vulnerability was found in Byzoro Smart S150 Management Platform V31R02B15. It has been classified as critic",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 8,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-0949",
+      "name": "Missing Authentication, Files or Directories Accessible to External Parties, Use of Hard-coded Credentials vul",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 12,
+      "score": 98.0,
+      "kev": false,
+      "rank": 9,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-10124",
+      "name": "The Vayu Blocks \u2013 Gutenberg Blocks for WordPress & WooCommerce plugin for WordPress is vulnerable to unauthori",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": false,
+      "rank": 10,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-1039",
+      "name": "Gessler GmbH WEB-MASTER has a restoration account that uses weak hard coded credentials and if exploited could",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 10,
+      "score": 98.0,
+      "kev": false,
+      "rank": 11,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-10764",
+      "name": "A vulnerability classified as critical has been found in Codezips Online Institute Management System 1.0. This",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 20,
+      "score": 98.0,
+      "kev": false,
+      "rank": 12,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-10765",
+      "name": "A vulnerability classified as critical was found in Codezips Online Institute Management System up to 1.0. Thi",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 20,
+      "score": 98.0,
+      "kev": false,
+      "rank": 13,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-10766",
+      "name": "A vulnerability, which was classified as critical, has been found in Codezips Free Exam Hall Seating Managemen",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 20,
+      "score": 98.0,
+      "kev": false,
+      "rank": 14,
+      "ransomware": false,
+      "vendor": null
+    },
+    {
+      "id": "CVE-2024-11054",
+      "name": "A vulnerability classified as critical was found in SourceCodester Simple Music Cloud Community System 1.0. Th",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 20,
+      "score": 98.0,
+      "kev": false,
+      "rank": 15,
+      "ransomware": false,
+      "vendor": null
+    }
+  ],
+  "exploited": [
+    {
+      "id": "CVE-2024-27348",
+      "name": "Apache HugeGraph-Server Improper Access Control Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": true,
+      "rank": 50,
+      "ransomware": false,
+      "vendor": "Apache HugeGraph-Server"
+    },
+    {
+      "id": "CVE-2024-40766",
+      "name": "SonicWall SonicOS Improper Access Control Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 19,
+      "score": 98.0,
+      "kev": true,
+      "rank": 84,
+      "ransomware": true,
+      "vendor": "SonicWall SonicOS"
+    },
+    {
+      "id": "CVE-2024-21410",
+      "name": "Microsoft Exchange Server Privilege Escalation Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 8,
+      "score": 88.2,
+      "kev": true,
+      "rank": 199,
+      "ransomware": false,
+      "vendor": "Microsoft Exchange Server"
+    },
+    {
+      "id": "CVE-2024-4358",
+      "name": "Progress Telerik Report Server Authentication Bypass by Spoofing Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 8,
+      "score": 88.2,
+      "kev": true,
+      "rank": 240,
+      "ransomware": false,
+      "vendor": "Progress Telerik Report Server"
+    },
+    {
+      "id": "CVE-2024-53704",
+      "name": "SonicWall SonicOS SSLVPN Improper Authentication Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 8,
+      "score": 88.2,
+      "kev": true,
+      "rank": 255,
+      "ransomware": true,
+      "vendor": "SonicWall SonicOS"
+    },
+    {
+      "id": "CVE-2024-54085",
+      "name": "AMI MegaRAC SPx Authentication Bypass by Spoofing Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 8,
+      "score": 88.2,
+      "kev": true,
+      "rank": 256,
+      "ransomware": false,
+      "vendor": "AMI MegaRAC SPx"
+    },
+    {
+      "id": "CVE-2024-7593",
+      "name": "Ivanti Virtual Traffic Manager Authentication Bypass Vulnerability",
+      "severity": "CRITICAL",
+      "base": 9.8,
+      "expl": 3.9,
+      "reach": 8,
+      "score": 88.2,
+      "kev": true,
+      "rank": 267,
+      "ransomware": false,
+      "vendor": "Ivanti Virtual Traffic Manager"
+    },
+    {
+      "id": "CVE-2024-24919",
+      "name": "Check Point Quantum Security Gateways Information Disclosure Vulnerability",
+      "severity": "HIGH",
+      "base": 8.6,
+      "expl": 3.9,
+      "reach": 25,
+      "score": 86.0,
+      "kev": true,
+      "rank": 281,
+      "ransomware": true,
+      "vendor": "Check Point Quantum Security Gateways"
+    }
+  ],
+  "validation": {
+    "scored_cves": 38002,
+    "kev_in_data": 165,
+    "fix_first": {
+      "50": 1,
+      "100": 2,
+      "250": 4,
+      "500": 11,
+      "1000": 15
+    },
+    "cvss_only": {
+      "50": 2,
+      "100": 3,
+      "250": 5,
+      "500": 6,
+      "1000": 14
+    },
+    "random": {
+      "50": 0.2,
+      "100": 0.4,
+      "250": 1.1,
+      "500": 2.2,
+      "1000": 4.3
+    },
+    "ransomware_in_data": 39
+  }
+}

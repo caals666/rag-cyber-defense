@@ -1,7 +1,7 @@
 """Compute the Insights page numbers from Neo4j and CISA's Known Exploited Vulnerabilities list.
 
 Run from backend/:  python -m analytics.build
-Writes frontend/public/analytics.json (the page reads this static file, so it costs no API calls).
+Writes frontend/data/analytics.json (the page reads this static file, so it costs no API calls).
 
 Fix-first score, 0 to 100, for every CVE:
     danger  = CVSS base score / 10                     how bad it is
@@ -22,7 +22,7 @@ from eval import tls  # noqa: F401
 from graph.connection import run
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "frontend" / "public" / "analytics.json"
+OUT = ROOT / "frontend" / "data" / "analytics.json"
 KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
 CUTOFFS = [50, 100, 250, 500, 1000]
 

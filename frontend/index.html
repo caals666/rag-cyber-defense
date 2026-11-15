@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyber Defense RAG</title>
+  <meta name="description" content="Ask cybersecurity questions answered from a CVE-CWE-CAPEC-ATT&CK knowledge graph">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <!-- Background: soft gradient + 3D dots of the knowledge graph -->
+  <div class="backdrop" aria-hidden="true"><div class="backdrop-mesh"></div><div id="dots" class="backdrop-gl"></div></div>
+  <nav id="nav" data-page="ask"></nav>
+
+  <!-- Sidebar of saved answers: hover the left edge or click the tab -->
+  <div class="recent-zone" aria-hidden="true"></div>
+  <aside id="recent" class="recent" hidden>
+    <div class="recent-head">
+      <button type="button" id="new-q" class="new-q">+ New question</button>
+      <button type="button" id="recent-close" class="close" aria-label="Close">×</button>
+    </div>
+    <p>Recent</p>
+    <ul id="recent-list"></ul>
+    <a href="history.html" class="all">See all history →</a>
+  </aside>
+  <button type="button" id="recent-tab" class="recent-tab" hidden>Recent</button>
+
+  <main id="main" class="hero">
+    <div id="hero">
+      <h1 data-words>Cyber Defense RAG</h1>
+      <p class="sub">Answers grounded in a CVE → CWE → CAPEC → ATT&amp;CK knowledge graph</p>
+    </div>
+
+    <div id="thread"></div>
+    <p id="error" class="card error" hidden></p>
+
+    <form id="ask" class="ask">
+      <div class="field">
+        <input id="q" aria-label="Ask a cybersecurity question" autocomplete="off">
+        <span id="hint" class="hint" aria-hidden="true"></span>
+      </div>
+      <button id="send" class="send" aria-label="Ask"></button>
+    </form>
+    <div id="examples" class="examples"></div>
+  </main>
+
+  <script type="module" src="js/chat.js"></script>
+</body>
+</html>

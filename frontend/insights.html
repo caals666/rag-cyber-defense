@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Insights · Cyber Defense RAG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><div class="backdrop-mesh"></div><div id="dots" class="backdrop-gl"></div></div>
+  <nav id="nav" data-page="insights"></nav>
+  <main class="insights">
+    <p class="eyebrow">Insights · CVEs published in 2024</p>
+    <h1 data-words>What 38,461 vulnerabilities tell us</h1>
+    <p class="sub">Everything below is computed from our knowledge graph and CISA's list of bugs attackers really used.</p>
+    <div id="content"><div class="card skeleton"><span></span><span></span><span></span></div></div>
+  </main>
+  <script type="module" src="js/insights.js"></script>
+</body>
+</html>

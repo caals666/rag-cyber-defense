@@ -10,3 +10,8 @@ def run(query, **params):
     """Run a read query and return the rows as plain dicts."""
     records, _, _ = driver.execute_query(query, params, routing_="r")
     return [r.data() for r in records]
+
+
+def write(query, **params):
+    """Run a query that changes the database (used only by the embedding script)."""
+    driver.execute_query(query, params, routing_="w")

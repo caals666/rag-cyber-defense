@@ -3,7 +3,7 @@ import json
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from graph import queries
 from graph.connection import driver, run
@@ -15,7 +15,7 @@ router = APIRouter()
 class Question(BaseModel):
     """What the website sends: the question, plus earlier turns of the chat for follow-ups."""
     question: str
-    history: list[dict] = []  # [{"question": ..., "answer": ...}, ...]
+    history: list[dict] = Field(default_factory=list)  # [{"question": ..., "answer": ...}, ...]
 
 
 @router.get("/health")

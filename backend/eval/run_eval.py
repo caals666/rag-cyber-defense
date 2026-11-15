@@ -23,7 +23,7 @@ from rag.grounding import ID, normalize
 
 ROOT = Path(__file__).resolve().parents[2]
 BENCHMARK = ROOT / "data" / "eval" / "benchmark.json"
-OUTPUTS = [ROOT / "data" / "eval" / "results.json", ROOT / "frontend" / "public" / "eval-results.json"]
+OUTPUTS = [ROOT / "data" / "eval" / "results.json", ROOT / "frontend" / "data" / "eval-results.json"]
 
 PLAIN_PROMPT = """You are a cybersecurity expert. Answer the question in 1 to 3 short sentences.
 Include the exact IDs (CVE, CWE, CAPEC, ATT&CK) and numbers you are asked for."""

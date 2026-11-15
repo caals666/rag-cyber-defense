@@ -1,0 +1,1682 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "reasoning_effort": "low",
+  "run_at": "2026-11-11 11:24",
+  "questions": 50,
+  "summary": {
+    "graphrag": {
+      "accuracy": 1.0,
+      "by_type": {
+        "severity": 1.0,
+        "cve_to_cwe": 1.0,
+        "cwe_to_capec": 1.0,
+        "capec_to_attack": 1.0,
+        "cve_count": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "median_latency_s": 5.89,
+      "errors": 0
+    },
+    "plain_llm": {
+      "accuracy": 0.07,
+      "by_type": {
+        "severity": 0.25,
+        "cve_to_cwe": 0.1,
+        "cwe_to_capec": 0.0,
+        "capec_to_attack": 0.0,
+        "cve_count": 0.0
+      },
+      "hallucination_rate": 0.659,
+      "median_latency_s": 0.71,
+      "errors": 0
+    }
+  },
+  "rows": [
+    {
+      "id": "severity-001",
+      "type": "severity",
+      "entity": "CVE-2024-38446",
+      "question": "What is the severity and CVSS base score of CVE-2024-38446?",
+      "truth": {
+        "severity": "MEDIUM",
+        "base_score": 6.5
+      },
+      "graphrag": {
+        "text": "Medium severity, CVSS base score 6.5. This means the bug is moderately risky, allowing an attacker to change a report\u2019s author by tweaking a request. Use proper permission checks on user\u2011controlled keys to mitigate.",
+        "latency": 1.67,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "- **Severity:** Critical  \n- **CVSS\u202fv3.1 Base Score:** 9.8 (CVSS Vector:\u202fCVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)",
+        "latency": 0.63,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-002",
+      "type": "severity",
+      "entity": "CVE-2024-54099",
+      "question": "What is the severity and CVSS base score of CVE-2024-54099?",
+      "truth": {
+        "severity": "HIGH",
+        "base_score": 7.1
+      },
+      "graphrag": {
+        "text": "High severity, CVSS base score 7.1. This means the bug is serious and could let attackers replace files, affecting the device\u2019s integrity and confidentiality.",
+        "latency": 1.08,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201154099 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.49,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-003",
+      "type": "severity",
+      "entity": "CVE-2024-45204",
+      "question": "What is the severity and CVSS base score of CVE-2024-45204?",
+      "truth": {
+        "severity": "MEDIUM",
+        "base_score": 4.3
+      },
+      "graphrag": {
+        "text": "Medium severity, CVSS base score 4.3. This means the flaw is moderate risk, allowing a low\u2011privileged user to leak saved NTLM password hashes. Use proper role\u2011based access controls to limit credential handling.",
+        "latency": 0.9,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201145204 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.67,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-004",
+      "type": "severity",
+      "entity": "CVE-2024-36840",
+      "question": "What is the severity and CVSS base score of CVE-2024-36840?",
+      "truth": {
+        "severity": "CRITICAL",
+        "base_score": 9.1
+      },
+      "graphrag": {
+        "text": "Critical severity, 9.1 out of 10 base CVSS score. This means the flaw is very dangerous and can let attackers run code or steal data.\u0000",
+        "latency": 0.84,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201136840 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.51,
+        "said": [],
+        "accuracy": 0.5,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-005",
+      "type": "severity",
+      "entity": "CVE-2024-11691",
+      "question": "What is the severity and CVSS base score of CVE-2024-11691?",
+      "truth": {
+        "severity": "HIGH",
+        "base_score": 8.8
+      },
+      "graphrag": {
+        "text": "High severity, CVSS base score 8.8. This means the bug is serious and could let attackers corrupt memory on Apple\u2011silicon devices running vulnerable Firefox or Thunderbird versions. Update to the latest browser version to fix it.",
+        "latency": 1.82,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201111691 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.65,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-006",
+      "type": "severity",
+      "entity": "CVE-2024-49318",
+      "question": "What is the severity and CVSS base score of CVE-2024-49318?",
+      "truth": {
+        "severity": "CRITICAL",
+        "base_score": 9.8
+      },
+      "graphrag": {
+        "text": "Critical severity, 9.8 out of 10 base CVSS score. This means the flaw is extremely dangerous.",
+        "latency": 1.04,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201149318 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.68,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-007",
+      "type": "severity",
+      "entity": "CVE-2024-36192",
+      "question": "What is the severity and CVSS base score of CVE-2024-36192?",
+      "truth": {
+        "severity": "MEDIUM",
+        "base_score": 5.4
+      },
+      "graphrag": {
+        "text": "Medium severity, CVSS base score 5.4. This means the flaw is moderate risk, allowing attackers to inject scripts that run in users\u2019 browsers. Apply proper output encoding or use a safe library to prevent the XSS.",
+        "latency": 1.11,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201136192 is rated **High severity** with a **CVSS\u202fv3.1 base score of 8.8**.",
+        "latency": 0.79,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-008",
+      "type": "severity",
+      "entity": "CVE-2024-2421",
+      "question": "What is the severity and CVSS base score of CVE-2024-2421?",
+      "truth": {
+        "severity": "CRITICAL",
+        "base_score": 9.8
+      },
+      "graphrag": {
+        "text": "Critical, 9.8 out of 10. This means the bug lets an attacker run commands on the system without logging in, giving them high\u2011level control. Update or patch the LenelS2 NetBox software to a version newer than 5.6.1.",
+        "latency": 0.96,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u20112421 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.67,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-009",
+      "type": "severity",
+      "entity": "CVE-2024-12015",
+      "question": "What is the severity and CVSS base score of CVE-2024-12015?",
+      "truth": {
+        "severity": "HIGH",
+        "base_score": 7.7
+      },
+      "graphrag": {
+        "text": "High severity, CVSS base score 7.7. This means the bug is serious and could let attackers run harmful database commands. Use safe coding practices like parameterised queries to prevent it.",
+        "latency": 6.95,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201112015 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 0.61,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "severity-010",
+      "type": "severity",
+      "entity": "CVE-2024-38131",
+      "question": "What is the severity and CVSS base score of CVE-2024-38131?",
+      "truth": {
+        "severity": "HIGH",
+        "base_score": 8.8
+      },
+      "graphrag": {
+        "text": "High severity, 8.8 base score. This means the bug is serious and could let attackers run code remotely.",
+        "latency": 6.95,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201138131 is rated **Critical** with a **CVSS\u202fv3.1 base score of 9.8**.",
+        "latency": 1.73,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_to_cwe-011",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-50419",
+      "question": "Which weakness (CWE) is behind CVE-2024-50419?",
+      "truth": [
+        "CWE-863"
+      ],
+      "graphrag": {
+        "text": "CWE\u2011863, an \u201cIncorrect Authorization\u201d mistake \u2013 the software lets users do things they shouldn\u2019t be allowed to, like accessing or changing data they aren\u2019t permitted to (CWE\u2011863). Fix it by clearly separating user roles (anonymous, normal, privileged, admin) and enforcing role\u2011based access control, making sure checks match the business logic.",
+        "latency": 9.13,
+        "said": [
+          "CWE-863"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201150419 is mapped to **CWE\u2011787: Out\u2011of\u2011Bounds Write**.",
+        "latency": 0.57,
+        "said": [
+          "CVE-2024-50419",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-012",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-50118",
+      "question": "Which weakness (CWE) is behind CVE-2024-50118?",
+      "truth": [
+        "CWE-476"
+      ],
+      "graphrag": {
+        "text": "The flaw is a NULL pointer dereference (CWE\u2011476). It happens when the code assumes a pointer is valid but it\u2019s actually\u202fNULL, leading to a crash. Fix it by checking pointers for NULL before use and ensuring proper locking in multithreaded code.",
+        "latency": 15.45,
+        "said": [
+          "CWE-476"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201150118 maps to **CWE\u2011787: Out\u2011of\u2011Bounds Write**.",
+        "latency": 1.71,
+        "said": [
+          "CVE-2024-50118",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-013",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-36409",
+      "question": "Which weakness (CWE) is behind CVE-2024-36409?",
+      "truth": [
+        "CWE-89"
+      ],
+      "graphrag": {
+        "text": "CWE\u201189 \u2013 improper neutralization of special elements used in an SQL command, i.e., SQL injection (CWE\u201189). This lets an attacker insert malicious SQL into the CRM\u2019s data entry, potentially reading or changing the database. Fix it by using safe libraries or frameworks that separate data from code, such as ORM tools that handle quoting and validation automatically.",
+        "latency": 9.55,
+        "said": [
+          "CWE-89"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201136409 is mapped to **CWE\u2011787: Out\u2011of\u2011Bounds Write**.",
+        "latency": 0.5,
+        "said": [
+          "CVE-2024-36409",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-014",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-10783",
+      "question": "Which weakness (CWE) is behind CVE-2024-10783?",
+      "truth": [
+        "CWE-862"
+      ],
+      "graphrag": {
+        "text": "Missing Authorization (CWE-862) \u2013 the bug lets attackers skip checks and gain admin access. Fix by adding proper role\u2011based access controls and ensuring authorization checks everywhere.",
+        "latency": 10.86,
+        "said": [
+          "CWE-862"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201110783 is mapped to **CWE\u201120: Improper Input Validation**.",
+        "latency": 0.65,
+        "said": [
+          "CVE-2024-10783",
+          "CWE-20"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-20"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-015",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-7054",
+      "question": "Which weakness (CWE) is behind CVE-2024-7054?",
+      "truth": [
+        "CWE-79"
+      ],
+      "graphrag": {
+        "text": "CWE\u201179, which is \u201cImproper Neutralization of Input During Web Page Generation (Cross\u2011site Scripting)\u201d. It lets an attacker inject malicious scripts that run in users\u2019 browsers, potentially stealing data or hijacking sessions. Mitigate by using a trusted library or framework that properly encodes output, and always sanitize and escape user\u2011provided data before displaying it.",
+        "latency": 6.4,
+        "said": [
+          "CWE-79"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u20117054 maps to **CWE\u201120: Improper Input Validation**.",
+        "latency": 2.74,
+        "said": [
+          "CVE-2024-7054",
+          "CWE-20"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-20"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-016",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-33996",
+      "question": "Which weakness (CWE) is behind CVE-2024-33996?",
+      "truth": [
+        "CWE-20"
+      ],
+      "graphrag": {
+        "text": "Improper Input Validation (CWE\u201120) \u2013 the bug lets users submit event types they shouldn\u2019t, because the service doesn\u2019t properly check what\u2019s allowed. Fix by using a solid input\u2011validation framework or formal parsing to enforce strict rules.",
+        "latency": 23.04,
+        "said": [
+          "CWE-20"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201133996 maps to **CWE\u2011787: Out\u2011of\u2011Bounds Write**.",
+        "latency": 2.73,
+        "said": [
+          "CVE-2024-33996",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-017",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-0427",
+      "question": "Which weakness (CWE) is behind CVE-2024-0427?",
+      "truth": [
+        "CWE-79"
+      ],
+      "graphrag": {
+        "text": "CWE\u201179 \u2013 improper neutralization of input during web page generation, i.e., cross\u2011site scripting (XSS). This lets attackers inject malicious scripts that run in users\u2019 browsers. Mitigate by using a vetted library or framework that handles proper output encoding, and always encode data based on its context before sending it to the browser.",
+        "latency": 9.38,
+        "said": [
+          "CWE-79"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u20110427 is mapped to **CWE\u2011787: Out\u2011of\u2011Bounds Write**.",
+        "latency": 1.67,
+        "said": [
+          "CVE-2024-0427",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-018",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-12445",
+      "question": "Which weakness (CWE) is behind CVE-2024-12445?",
+      "truth": [
+        "CWE-79"
+      ],
+      "graphrag": {
+        "text": "CWE\u201179 \u2013 improper neutralization of input during web page generation, i.e., cross\u2011site scripting. It lets an attacker inject malicious scripts that run in users\u2019 browsers. Mitigate by using a trusted library or framework that correctly encodes output, and always validate and escape user\u2011provided data.",
+        "latency": 10.44,
+        "said": [
+          "CWE-79"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201112445 is mapped to **CWE\u2011787: Out\u2011of\u2011Bounds Write**.",
+        "latency": 0.63,
+        "said": [
+          "CVE-2024-12445",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-019",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-31047",
+      "question": "Which weakness (CWE) is behind CVE-2024-31047?",
+      "truth": [
+        "CWE-190"
+      ],
+      "graphrag": {
+        "text": "CWE\u2011190, an integer overflow or wraparound bug, lets a local attacker crash the program (CWE\u2011190). Mitigate by using languages or libraries that check number bounds and enforce strict protocol definitions.",
+        "latency": 9.39,
+        "said": [
+          "CWE-190"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CVE\u20112024\u201131047 is mapped to **CWE\u2011787: Out\u2011of\u2011bounds Write**.",
+        "latency": 0.74,
+        "said": [
+          "CVE-2024-31047",
+          "CWE-787"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CWE-787"
+        ]
+      }
+    },
+    {
+      "id": "cve_to_cwe-020",
+      "type": "cve_to_cwe",
+      "entity": "CVE-2024-10555",
+      "question": "Which weakness (CWE) is behind CVE-2024-10555?",
+      "truth": [
+        "CWE-79"
+      ],
+      "graphrag": {
+        "text": "CWE\u201179 \u2013 improper neutralisation of input during web page generation, i.e., cross\u2011site scripting. It lets an attacker inject malicious scripts that run in users\u2019 browsers. Mitigate by using a trusted library or framework that correctly encodes output (e.g., OWASP ESAPI, Microsoft Anti\u2011XSS) and by understanding the context where data is used.",
+        "latency": 5.05,
+        "said": [
+          "CWE-79"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "The vulnerability CVE\u20112024\u201110555 maps to **CWE\u201179: Improper Neutralization of Input During Web Page Generation ('Cross\u2011Site Scripting')**.",
+        "latency": 1.04,
+        "said": [
+          "CVE-2024-10555",
+          "CWE-79"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      }
+    },
+    {
+      "id": "cwe_to_capec-021",
+      "type": "cwe_to_capec",
+      "entity": "CWE-667",
+      "question": "Which attack patterns (CAPEC) exploit CWE-667?",
+      "truth": [
+        "CAPEC-25",
+        "CAPEC-26",
+        "CAPEC-27"
+      ],
+      "graphrag": {
+        "text": "Three attack patterns exploit improper locking (CWE-667): Forced Deadlock (CAPEC-25), Leveraging Race Conditions (CAPEC-26), and Leveraging Race Conditions via Symbolic Links (CAPEC-27) \u2013 total 3. These let attackers cause deadlocks or race conditions that can crash or hijack a program. To reduce risk, use standard locking APIs as recommended (mitigation).",
+        "latency": 5.7,
+        "said": [
+          "CAPEC-25",
+          "CAPEC-26",
+          "CAPEC-27",
+          "CWE-667"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011262\u202f(Brute\u2011Force Attack), CAPEC\u2011268\u202f(Password Guessing), and CAPEC\u2011269\u202f(Credential Stuffing) are attack patterns that commonly exploit CWE\u2011667\u202f(Improper Lockout).",
+        "latency": 0.68,
+        "said": [
+          "CAPEC-262",
+          "CAPEC-268",
+          "CAPEC-269",
+          "CWE-667"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-262",
+          "CAPEC-268",
+          "CAPEC-269"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-022",
+      "type": "cwe_to_capec",
+      "entity": "CWE-158",
+      "question": "Which attack patterns (CAPEC) exploit CWE-158?",
+      "truth": [
+        "CAPEC-52",
+        "CAPEC-53"
+      ],
+      "graphrag": {
+        "text": "2 attack patterns exploit this issue: embedding null bytes (CAPEC-52) and using postfix, null\u2011terminate, or backslash tricks (CAPEC-53). To defend, validate input strictly with allow\u2011lists and canonicalize data before checking it.",
+        "latency": 10.04,
+        "said": [
+          "CAPEC-52",
+          "CAPEC-53"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u201166\u202f(\u201cXPath Injection\u201d) and CAPEC\u2011640\u202f(\u201cXPath Injection via XML External Entity (XXE)\u201d) are the primary attack patterns that exploit CWE\u2011158.",
+        "latency": 0.55,
+        "said": [
+          "CAPEC-640",
+          "CAPEC-66",
+          "CWE-158"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-640",
+          "CAPEC-66"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-023",
+      "type": "cwe_to_capec",
+      "entity": "CWE-645",
+      "question": "Which attack patterns (CAPEC) exploit CWE-645?",
+      "truth": [
+        "CAPEC-2"
+      ],
+      "graphrag": {
+        "text": "CAPEC-2 \u2013 Inducing Account Lockout (medium severity). This pattern lets attackers lock legitimate users out by triggering the overly strict lockout mechanism. Use smarter throttling or lockout timeouts to mitigate.",
+        "latency": 4.03,
+        "said": [
+          "CAPEC-2"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011506\u202f(\u201cHard\u2011coded Password\u201d) and CAPEC\u2011552\u202f(\u201cHard\u2011coded Cryptographic Key\u201d) are the attack patterns that directly exploit CWE\u2011645\u202f(Use of Hard\u2011coded Cryptographic Key).",
+        "latency": 0.71,
+        "said": [
+          "CAPEC-506",
+          "CAPEC-552",
+          "CWE-645"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-506",
+          "CAPEC-552"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-024",
+      "type": "cwe_to_capec",
+      "entity": "CWE-564",
+      "question": "Which attack patterns (CAPEC) exploit CWE-564?",
+      "truth": [
+        "CAPEC-109"
+      ],
+      "graphrag": {
+        "text": "Object Relational Mapping Injection (CAPEC\u2011109) exploits the SQL Injection: Hibernate weakness (CWE\u2011564). This lets an attacker craft malicious input that changes database queries when using Hibernate. Use prepared statements, least\u2011privilege accounts, and strict input allow\u2011listing to mitigate.",
+        "latency": 6.47,
+        "said": [
+          "CAPEC-109",
+          "CWE-564"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u201166\u202f\u2013\u202fSQL Injection is the primary attack pattern that exploits CWE\u2011564.",
+        "latency": 0.69,
+        "said": [
+          "CAPEC-66",
+          "CWE-564"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-66"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-025",
+      "type": "cwe_to_capec",
+      "entity": "CWE-532",
+      "question": "Which attack patterns (CAPEC) exploit CWE-532?",
+      "truth": [
+        "CAPEC-215"
+      ],
+      "graphrag": {
+        "text": "CAPEC-215\u202f\u2013\u202ffuzzing to map the application (the attacker sends random data to see how the program behaves and may discover that it logs secrets)\u202f[CAPEC-215]. This is the only attack pattern linked to CWE\u2011532 (insertion of sensitive information into log files). To reduce risk, avoid writing secrets to logs, delete debug logs before production, and protect log files from unauthorized access.",
+        "latency": 2.32,
+        "said": [
+          "CAPEC-215",
+          "CWE-532"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC attack patterns that target **CWE\u2011532 (Missing Authorization)** include:\n\n- **CAPEC\u2011115** \u2013 \u201cExploiting Privilege/Authorization Bypass\u201d\n- **CAPEC\u2011117** \u2013 \u201cPrivilege Escalation via Exploitation of a Vulnerability\u201d\n- **CAPEC\u2011124** \u2013 \u201cAccessing/Modifying Unauthorized Data\u201d\n- **CAPEC\u2011148** \u2013 \u201cImproper Access Control\u201d  \n\nThese CAPEC entries describe techniques that specifically take advantage of missing or improper authorization checks.",
+        "latency": 0.77,
+        "said": [
+          "CAPEC-115",
+          "CAPEC-117",
+          "CAPEC-124",
+          "CAPEC-148",
+          "CWE-532"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-115",
+          "CAPEC-117",
+          "CAPEC-124",
+          "CAPEC-148"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-026",
+      "type": "cwe_to_capec",
+      "entity": "CWE-1246",
+      "question": "Which attack patterns (CAPEC) exploit CWE-1246?",
+      "truth": [
+        "CAPEC-212"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011212\u202fFunctionality Misuse (medium likelihood, medium severity) is the attack pattern that can exploit CWE\u20111246. This means an attacker could misuse the device\u2019s limited\u2011write memory functions to cause wear\u2011out or data loss. Use secure wear\u2011leveling algorithms and prevent bypassing them to mitigate the risk.",
+        "latency": 4.94,
+        "said": [
+          "CAPEC-212",
+          "CWE-1246"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011125\u202f(\u201cExploiting Improper Input Validation\u201d) and CAPEC\u2011248\u202f(\u201cArray Indexing Errors\u201d) are the primary attack patterns that map to CWE\u20111246\u202f(Improper Validation of Array Index).",
+        "latency": 0.68,
+        "said": [
+          "CAPEC-125",
+          "CAPEC-248",
+          "CWE-1246"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-125",
+          "CAPEC-248"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-027",
+      "type": "cwe_to_capec",
+      "entity": "CWE-1245",
+      "question": "Which attack patterns (CAPEC) exploit CWE-1245?",
+      "truth": [
+        "CAPEC-74"
+      ],
+      "graphrag": {
+        "text": "CAPEC-74\u202f\u2013\u202fManipulating State (medium likelihood, high severity). It lets an attacker move the hardware into unexpected states, causing crashes or privilege gains. Mitigate by defining all possible states and handling unused ones with secure defaults.",
+        "latency": 6.97,
+        "said": [
+          "CAPEC-74"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011115\u202f(\u201cInput Data Manipulation\u201d) is the primary attack pattern that directly exploits CWE\u20111245\u202f(Improper Validation of Consumed Data). Other related patterns that can also target this weakness include CAPEC\u201120\u202f(\u201cBuffer Overflow via Environment Variables\u201d) and CAPEC\u2011640\u202f(\u201cExploiting Improper Input Validation\u201d).",
+        "latency": 0.76,
+        "said": [
+          "CAPEC-115",
+          "CAPEC-20",
+          "CAPEC-640",
+          "CWE-1245"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-115",
+          "CAPEC-20",
+          "CAPEC-640"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-028",
+      "type": "cwe_to_capec",
+      "entity": "CWE-798",
+      "question": "Which attack patterns (CAPEC) exploit CWE-798?",
+      "truth": [
+        "CAPEC-191",
+        "CAPEC-70"
+      ],
+      "graphrag": {
+        "text": "Two attack patterns exploit hard\u2011coded credentials (CWE\u2011798). There are 2 in total: \u201cTry Common or Default Usernames and Passwords\u201d (CAPEC\u201170, high severity) and \u201cRead Sensitive Constants Within an Executable\u201d (CAPEC\u2011191, low severity). Attackers try default passwords to gain access (CAPEC\u201170 \u2192 T1078.001) or read embedded secrets from the program (CAPEC\u2011191 \u2192 T1552.001). To reduce risk, store passwords and keys outside the code in encrypted, access\u2011controlled files or require users to set unique credentials on first login.",
+        "latency": 9.51,
+        "said": [
+          "CAPEC-191",
+          "CAPEC-70",
+          "CWE-798",
+          "T1078.001",
+          "T1552.001"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011242\u202f\u2013\u202f**Exploitation of Hard\u2011coded Credentials** is the primary attack pattern that directly targets CWE\u2011798 (Use of Hard\u2011coded Credentials).  \nOther CAPEC patterns that commonly leverage hard\u2011coded credentials include:  \n\n* **CAPEC\u201117** \u2013 *Password Guessing* (attackers may guess or brute\u2011force the known hard\u2011coded password).  \n* **CAPEC\u2011552** \u2013 *Credential Dumping* (extracting hard\u2011coded credentials from binaries or configuration files).  \n\nThese patterns are the most frequently associated with exploiting CWE\u2011798.",
+        "latency": 0.8,
+        "said": [
+          "CAPEC-17",
+          "CAPEC-242",
+          "CAPEC-552",
+          "CWE-798"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-17",
+          "CAPEC-242",
+          "CAPEC-552"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-029",
+      "type": "cwe_to_capec",
+      "entity": "CWE-1271",
+      "question": "Which attack patterns (CAPEC) exploit CWE-1271?",
+      "truth": [
+        "CAPEC-74"
+      ],
+      "graphrag": {
+        "text": "CAPEC-74\u202f\u2013\u202fManipulating State (Medium likelihood, high severity). This pattern lets an attacker change the device\u2019s internal state, such as flipping uninitialized security registers, to bypass protections. Mitigate by ensuring all security\u2011critical registers are set to known values on reset and checking designs for uninitialized flip\u2011flops.",
+        "latency": 7.24,
+        "said": [
+          "CAPEC-74"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011115\u202f(Exfiltration Over Physical Medium), CAPEC\u2011564\u202f(Exfiltration Over Alternative Protocol), and CAPEC\u2011640\u202f(Exfiltration Over Unencrypted Channel) are attack patterns that can be used to exploit CWE\u20111271\u202f(Sensitive Information Unprotected in Memory).",
+        "latency": 0.77,
+        "said": [
+          "CAPEC-115",
+          "CAPEC-564",
+          "CAPEC-640",
+          "CWE-1271"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-115",
+          "CAPEC-564",
+          "CAPEC-640"
+        ]
+      }
+    },
+    {
+      "id": "cwe_to_capec-030",
+      "type": "cwe_to_capec",
+      "entity": "CWE-1193",
+      "question": "Which attack patterns (CAPEC) exploit CWE-1193?",
+      "truth": [
+        "CAPEC-1",
+        "CAPEC-180"
+      ],
+      "graphrag": {
+        "text": "Two attack patterns exploit this issue (CWE\u20111193): Accessing functionality not properly constrained by ACLs (CAPEC\u20111) and exploiting incorrectly configured access\u2011control security levels (CAPEC\u2011180). Both let attackers use untrusted firmware before proper memory and fabric protections are in place. Mitigate by enabling fabric access controls and memory protections early in the boot sequence before any third\u2011party hardware IP runs.",
+        "latency": 6.41,
+        "said": [
+          "CAPEC-1",
+          "CAPEC-180",
+          "CWE-1193"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011100\u202f(\u201cBuffer Overflow\u201d) and CAPEC\u2011125\u202f(\u201cImproper Input Validation\u201d) are the primary attack patterns that target the weakness identified as **CWE\u20111193**.",
+        "latency": 0.72,
+        "said": [
+          "CAPEC-100",
+          "CAPEC-125",
+          "CWE-1193"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "CAPEC-100",
+          "CAPEC-125"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-031",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-448",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-448 map to?",
+      "truth": [
+        "T1027.009"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011448 maps to the Embedded Payloads technique (T1027.009), which is used by attackers to hide malicious code inside legitimate files. Use anti\u2011virus tools to detect and block such infected DLLs.",
+        "latency": 2.74,
+        "said": [
+          "CAPEC-448",
+          "T1027.009"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011448 (\u201cExploiting Trusted Relationships\u201d) maps to the following MITRE\u202fATT&CK techniques:\n\n- **T1199 \u2013 Trusted Relationship**  \n- **T1195 \u2013 Supply Chain Compromise** (sub\u2011technique T1195.001 \u2013 Compromise Software Supply Chain)  \n\nThese are the primary ATT&CK technique IDs associated with CAPEC\u2011448.",
+        "latency": 2.88,
+        "said": [
+          "CAPEC-448",
+          "T1195",
+          "T1195.001",
+          "T1199"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1195",
+          "T1195.001",
+          "T1199"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-032",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-233",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-233 map to?",
+      "truth": [
+        "T1548"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011233 maps to the ATT&CK technique Abuse Elevation Control Mechanism (T1548), which describes how an attacker takes advantage of a system\u2019s own privilege\u2011escalation features to gain higher rights than they should have.",
+        "latency": 6.29,
+        "said": [
+          "CAPEC-233",
+          "T1548"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011233 **(Exploiting Trusted Relationships)** maps to the following MITRE\u202fATT&CK techniques:\n\n* **T1199 \u2013 Trusted Relationship** (legacy ID; now covered under **T1078 \u2013 Valid Accounts** and **T1566 \u2013 Phishing** when the trusted relationship is abused via credential compromise).",
+        "latency": 0.78,
+        "said": [
+          "CAPEC-233",
+          "T1078",
+          "T1199",
+          "T1566"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1078",
+          "T1199",
+          "T1566"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-033",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-94",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-94 map to?",
+      "truth": [
+        "T1557"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u201194 maps to the ATT&CK technique Adversary\u2011in\u2011the\u2011Middle (T1557), which describes attackers inserting themselves into a communication channel to steal or modify data. Use strong mutual authentication and encrypt traffic (e.g., TLS) to mitigate it.",
+        "latency": 4.94,
+        "said": [
+          "CAPEC-94",
+          "T1557"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u201194 (Cross\u2011Site Request Forgery) is mapped to the following MITRE\u202fATT&CK techniques:\n\n- **T1190 \u2013 Exploit Public\u2011Facing Application**  \n- **T1566 \u2013 Phishing** (specifically the \u201cSpearphishing Link\u201d sub\u2011technique, T1566.002)  \n\nThese are the primary ATT&CK techniques that correspond to the behaviors described in CAPEC\u201194.",
+        "latency": 1.98,
+        "said": [
+          "CAPEC-94",
+          "T1190",
+          "T1566",
+          "T1566.002"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1190",
+          "T1566",
+          "T1566.002"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-034",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-545",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-545 map to?",
+      "truth": [
+        "T1005",
+        "T1555.001"
+      ],
+      "graphrag": {
+        "text": "Data from Local System (T1005) \u2013 attackers copy files or other data from the victim\u2019s computer.  \nKeychain (T1555.001) \u2013 attackers read stored passwords or other credentials from the system\u2019s keychain.  \n\nBoth techniques are linked to CAPEC\u2011545, so watch for unusual file access and credential\u2011store reads and limit who can read those resources.",
+        "latency": 8.43,
+        "said": [
+          "CAPEC-545",
+          "T1005",
+          "T1555.001"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011545 (\u201cExploiting Trusted Relationships\u201d) maps to the following MITRE\u202fATT&CK technique(s):\n\n* **T1199 \u2013 Trusted Relationship** (formerly \u201cExploitation of Trusted Relationship\u201d)  \n* **T1068 \u2013 Exploitation for Privilege Escalation** (when the trusted relationship is used to gain higher privileges)  \n\nThese are the primary ATT&CK techniques associated with CAPEC\u2011545.",
+        "latency": 0.9,
+        "said": [
+          "CAPEC-545",
+          "T1068",
+          "T1199"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1068",
+          "T1199"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-035",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-700",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-700 map to?",
+      "truth": [
+        "T1599"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011700 maps to the ATT&CK technique T1599 \u2013 Network Boundary Bridging, which lets an attacker use compromised network devices to create a channel between trusted and untrusted parts of the network.",
+        "latency": 6.31,
+        "said": [
+          "CAPEC-700",
+          "T1599"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011700\u202f(Exploiting Trusted Relationships) maps to the following MITRE\u202fATT&CK techniques:\n\n- **T1199 \u2013 Trusted Relationship** (legacy ID; now covered by T1078\u202fValid Accounts and T1190\u202fExploitation for Client Execution)  \n- **T1078 \u2013 Valid Accounts** (use of compromised trusted credentials)  \n- **T1190 \u2013 Exploit Public\u2011Facing Application** (when the trusted relationship is abused to deliver exploits)",
+        "latency": 0.8,
+        "said": [
+          "CAPEC-700",
+          "T1078",
+          "T1190",
+          "T1199"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1078",
+          "T1190",
+          "T1199"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-036",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-652",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-652 map to?",
+      "truth": [
+        "T1558"
+      ],
+      "graphrag": {
+        "text": "It maps to the technique \u201cSteal or Forge Kerberos Tickets\u201d (T1558) \u2013 attackers use stolen Kerberos credentials to get authenticated access to other systems.",
+        "latency": 4.18,
+        "said": [
+          "T1558"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011652\u202f(Exploiting Trusted Relationships) maps to the following MITRE\u202fATT&CK techniques:\n\n- **T1199 \u2013 Trusted Relationship**  \n- **T1195 \u2013 Supply Chain Compromise** (when the trusted relationship is leveraged through a supply\u2011chain vector)",
+        "latency": 0.6,
+        "said": [
+          "CAPEC-652",
+          "T1195",
+          "T1199"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1195",
+          "T1199"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-037",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-114",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-114 map to?",
+      "truth": [
+        "T1548"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011114 maps to the technique \u201cAbuse Elevation Control Mechanism\u201d (T1548), which attackers use to gain higher privileges.",
+        "latency": 3.89,
+        "said": [
+          "CAPEC-114",
+          "T1548"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011114\u202f(Exploiting Trusted Relationships) maps to the following MITRE\u202fATT&CK techniques:\n\n- **T1199 \u2013 Trusted Relationship**  \n- **T1078 \u2013 Valid Accounts** (when the trusted relationship is abused via compromised credentials)  \n- **T1195 \u2013 Supply Chain Compromise** (when the trusted relationship involves third\u2011party software or services)",
+        "latency": 1.93,
+        "said": [
+          "CAPEC-114",
+          "T1078",
+          "T1195",
+          "T1199"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1078",
+          "T1195",
+          "T1199"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-038",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-11",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-11 map to?",
+      "truth": [
+        "T1036.006"
+      ],
+      "graphrag": {
+        "text": "It maps to the technique \u201cSpace after Filename\u201d (T1036.006), which lets an attacker hide malicious files by adding a space after the name. This helps them stay hidden while exploiting the web\u2011server misclassification. Use server logic that decides actions by content, not by filename or extension (mitigation).",
+        "latency": 7.26,
+        "said": [
+          "T1036.006"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u201111\u202f(\u201cAccessing Functionality Not Properly Constrained by Authentication\u201d) maps primarily to the following MITRE\u202fATT&CK techniques:\n\n- **T1078 \u2013 Valid Accounts**  \n- **T1550.001 \u2013 Use Alternate Authentication Material** (e.g., stolen credentials, token impersonation)  \n- **T1110 \u2013 Brute Force** (when the attacker repeatedly tries to guess or bypass the weak authentication controls)",
+        "latency": 2.8,
+        "said": [
+          "CAPEC-11",
+          "T1078",
+          "T1110",
+          "T1550.001"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1078",
+          "T1110",
+          "T1550.001"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-039",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-309",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-309 map to?",
+      "truth": [
+        "T1016",
+        "T1049",
+        "T1590"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011309 maps to three ATT&CK techniques: discovering the system\u2019s network settings (T1016), finding active network connections (T1049), and gathering overall network information about the victim (T1590). These help an attacker see what devices and routes exist on the target network. Use network monitoring and restrict scanning tools to mitigate.",
+        "latency": 6.8,
+        "said": [
+          "CAPEC-309",
+          "T1016",
+          "T1049",
+          "T1590"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011309\u202f(Exploiting Trusted Relationships) maps to the following MITRE\u202fATT&CK techniques:\n\n- **T1199 \u2013 Trusted Relationship** (the primary technique for abusing a trusted third\u2011party relationship)  \n- **T1078 \u2013 Valid Accounts** (when the exploit is used to gain legitimate credentials or access)  \n\nThese are the current ATT&CK IDs that correspond to the behavior described in CAPEC\u2011309.",
+        "latency": 0.87,
+        "said": [
+          "CAPEC-309",
+          "T1078",
+          "T1199"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1078",
+          "T1199"
+        ]
+      }
+    },
+    {
+      "id": "capec_to_attack-040",
+      "type": "capec_to_attack",
+      "entity": "CAPEC-482",
+      "question": "Which MITRE ATT&CK techniques does CAPEC-482 map to?",
+      "truth": [
+        "T1498.001",
+        "T1499.001",
+        "T1499.002"
+      ],
+      "graphrag": {
+        "text": "CAPEC\u2011482 maps to three ATT&CK techniques (3 total): Direct Network Flood (T1498.001), OS Exhaustion Flood (T1499.001) and Service Exhaustion Flood (T1499.002). These describe flooding attacks that overwhelm network connections, the operating system, or a specific service, denying legitimate users access. To help defend, monitor traffic for unusual TCP patterns and rate\u2011limit SYN packets.",
+        "latency": 5.28,
+        "said": [
+          "CAPEC-482",
+          "T1498.001",
+          "T1499.001",
+          "T1499.002"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "CAPEC\u2011482 maps to the following MITRE\u202fATT&CK techniques:\n\n- **T1199 \u2013 Trusted Relationship** (legacy ID)  \n- **T1550.002 \u2013 Pass the Ticket** (the current sub\u2011technique that captures the same \u201cexploiting trusted relationships\u201d behavior).",
+        "latency": 1.7,
+        "said": [
+          "CAPEC-482",
+          "T1199",
+          "T1550.002"
+        ],
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "invented": [
+          "T1199",
+          "T1550.002"
+        ]
+      }
+    },
+    {
+      "id": "cve_count-041",
+      "type": "cve_count",
+      "entity": "CWE-1326",
+      "question": "How many CVEs in the dataset are linked to CWE-1326?",
+      "truth": 3,
+      "graphrag": {
+        "text": "3 CVEs are linked to that hardware root\u2011of\u2011trust weakness (CWE\u20111326).",
+        "latency": 7.84,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVEs** in the dataset that are linked to **CWE\u20111326**.",
+        "latency": 0.56,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-042",
+      "type": "cve_count",
+      "entity": "CWE-656",
+      "question": "How many CVEs in the dataset are linked to CWE-656?",
+      "truth": 3,
+      "graphrag": {
+        "text": "3 CVEs are linked to that weakness (CWE\u2011656).",
+        "latency": 5.65,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVEs** in the dataset that are linked to **CWE\u2011656**.",
+        "latency": 0.57,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-043",
+      "type": "cve_count",
+      "entity": "CWE-783",
+      "question": "How many CVEs in the dataset are linked to CWE-783?",
+      "truth": 13,
+      "graphrag": {
+        "text": "13 CVEs are linked to that mistake (CWE-783).",
+        "latency": 0.71,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVEs** in the dataset that are linked to **CWE\u2011783**.",
+        "latency": 0.57,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-044",
+      "type": "cve_count",
+      "entity": "CWE-185",
+      "question": "How many CVEs in the dataset are linked to CWE-185?",
+      "truth": 3,
+      "graphrag": {
+        "text": "3 CVEs are linked to that issue (CWE-185).",
+        "latency": 5.3,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "I don\u2019t have access to the specific dataset you\u2019re referencing, so I can\u2019t give an exact count of CVEs linked to **CWE\u2011185**. If you can provide the dataset or a summary of its contents, I can quickly determine the number for you.",
+        "latency": 0.47,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-045",
+      "type": "cve_count",
+      "entity": "CWE-532",
+      "question": "How many CVEs in the dataset are linked to CWE-532?",
+      "truth": 175,
+      "graphrag": {
+        "text": "175 CVEs are linked to CWE\u2011532 (the issue of writing sensitive data to log files).",
+        "latency": 2.04,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVEs** in the dataset that are linked to **CWE\u2011532**.",
+        "latency": 1.59,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-046",
+      "type": "cve_count",
+      "entity": "CWE-325",
+      "question": "How many CVEs in the dataset are linked to CWE-325?",
+      "truth": 2,
+      "graphrag": {
+        "text": "2 CVEs are linked to that weakness (CWE-325).",
+        "latency": 6.89,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "I don\u2019t have access to the specific dataset you\u2019re referencing, so I can\u2019t give an exact count of CVEs linked to **CWE\u2011325**. If you can provide the dataset or a summary of its contents, I\u2019ll be able to tell you the precise number.",
+        "latency": 0.73,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-047",
+      "type": "cve_count",
+      "entity": "CWE-86",
+      "question": "How many CVEs in the dataset are linked to CWE-86?",
+      "truth": 2,
+      "graphrag": {
+        "text": "2 CVEs are linked to CWE\u201186 (the issue with handling invalid characters in identifiers).",
+        "latency": 5.6,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVEs** in the dataset that are linked to **CWE\u201186**.",
+        "latency": 0.54,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-048",
+      "type": "cve_count",
+      "entity": "CWE-1336",
+      "question": "How many CVEs in the dataset are linked to CWE-1336?",
+      "truth": 32,
+      "graphrag": {
+        "text": "32 CVEs are linked to that template\u2011engine issue (CWE\u20111336).",
+        "latency": 2.74,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVE entries** in the dataset that are linked to **CWE\u20111336**.",
+        "latency": 0.65,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-049",
+      "type": "cve_count",
+      "entity": "CWE-1004",
+      "question": "How many CVEs in the dataset are linked to CWE-1004?",
+      "truth": 3,
+      "graphrag": {
+        "text": "3 CVEs are linked to CWE\u20111004. This means three known bugs involve storing sensitive data in cookies without the HttpOnly flag. Use the HttpOnly flag on such cookies to protect them.",
+        "latency": 2.79,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "I don\u2019t have access to the specific dataset you\u2019re referencing, so I can\u2019t give an exact count of CVEs linked to CWE\u20111004. If you can provide the dataset or a summary of its contents, I can quickly determine the number for you.",
+        "latency": 1.66,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    },
+    {
+      "id": "cve_count-050",
+      "type": "cve_count",
+      "entity": "CWE-1262",
+      "question": "How many CVEs in the dataset are linked to CWE-1262?",
+      "truth": 3,
+      "graphrag": {
+        "text": "3 CVEs are linked to that issue (CWE-1262).",
+        "latency": 6.09,
+        "said": [],
+        "accuracy": 1.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      },
+      "plain_llm": {
+        "text": "There are **0 CVEs** in the dataset that are linked to **CWE\u20111262**.",
+        "latency": 0.6,
+        "said": [],
+        "accuracy": 0.0,
+        "precision": null,
+        "recall": null,
+        "invented": []
+      }
+    }
+  ]
+}

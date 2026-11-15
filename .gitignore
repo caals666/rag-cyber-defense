@@ -1,6 +1,7 @@
 # Whitelist: everything is ignored unless listed below.
 /*
 !/.gitignore
+!/.gitattributes
 !/LICENSE
 !/README.md
 !/.env.example
@@ -8,6 +9,7 @@
 !/backend/
 !/frontend/
 !/neo4j/
+!/tests/
 !/data/
 !/docs/
 !/.github/
