@@ -160,17 +160,6 @@ Also new: search by meaning, the "Verified" check on every answer, streaming cha
 - Groq's free tier allows about 200,000 tokens a day; long answers can wait on its rate limit.
 - Online (Vercel) questions without an ID use keyword search, not semantic search.
 
-## 9. Roadmap
-
-- [x] Knowledge graph of CVE, CWE, CAPEC and ATT&CK in Neo4j
-- [x] ID lookup with tested Cypher queries
-- [x] Embeddings on every node (all-MiniLM-L6-v2)
-- [x] Hybrid retrieval: vector search + graph expansion
-- [x] Measured accuracy and hallucination; KEV-tested Fix-first score
-- [ ] 150-question benchmark including questions without IDs
-- [ ] EPSS scores and MITRE D3FEND defences in the graph
-- [ ] All CVE years and a weekly NVD update
-
 ---
 
 Never commit keys or passwords: keep them in `.env` (git-ignored). For defensive, educational and
