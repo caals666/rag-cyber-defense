@@ -17,4 +17,4 @@ VECTOR_TOP_K = int(os.getenv("VECTOR_TOP_K", "5"))              # how many entry
 VECTOR_MIN_SCORE = float(os.getenv("VECTOR_MIN_SCORE", "0.65"))  # 0..1; below this a match is too weak to use
 
 # Browser origins allowed to call the API
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "https://graphcyrag.vercel.app,https://rag-cyber-defense-ox4x.vercel.app,http://localhost:3000").split(",")
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "https://graphcyrag.vercel.app,https://rag-cyber-defense-ox4x.vercel.app,https://rag-cyber-defense-xbvl.vercel.app,http://localhost:3000").split(",")
