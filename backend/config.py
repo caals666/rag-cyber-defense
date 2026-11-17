@@ -16,5 +16,12 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM
 VECTOR_TOP_K = int(os.getenv("VECTOR_TOP_K", "5"))              # how many entry nodes to start from
 VECTOR_MIN_SCORE = float(os.getenv("VECTOR_MIN_SCORE", "0.65"))  # 0..1; below this a match is too weak to use
 
-# Browser origins allowed to call the API
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "https://graphcyrag.vercel.app,https://rag-cyber-defense-ox4x.vercel.app,http://localhost:3000").split(",")
+# Browser origins allowed to call the API. Include the deployed frontend origin and local dev.
+CORS_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ORIGINS",
+        "https://rag-cyber-defense-sigma.vercel.app,https://graphcyrag.vercel.app,https://rag-cyber-defense-ox4x.vercel.app,http://localhost:3000",
+    ).split(",")
+    if origin.strip()
+]
