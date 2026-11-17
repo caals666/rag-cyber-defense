@@ -1,6 +1,6 @@
 // Talking to the backend lives here, so pages only deal with what to show.
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://rag-cyber-defense.vercel.app";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://rag-cyber-defense-sigma.vercel.app";
 
 // Sends a question and calls onEvent for every event the backend streams back.
 // The backend sends one JSON object per line: facts, answer pieces, details pieces, done.
