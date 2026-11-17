@@ -1,9 +1,9 @@
 """Settings, read from environment variables (see .env.example)."""
 import os
 
-NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
-NEO4J_USER = os.getenv("NEO4J_USER") or os.getenv("NEO4J_USERNAME", "neo4j")  # Aura names it NEO4J_USERNAME
-NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "password123")
+NEO4J_URI = os.getenv("NEO4J_URI", "")
+NEO4J_USER = os.getenv("NEO4J_USER","")  # Aura names it NEO4J_USERNAME
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "")
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")

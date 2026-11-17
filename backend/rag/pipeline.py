@@ -121,6 +121,10 @@ def answer_stream(question, history=(), explain=True):
     """Events for the website, in order: facts, answer pieces, details pieces, done."""
     retrieved = retrieve(question, history)
     yield {"type": "facts", **retrieved}
+    if retrieved["not_found"] and not retrieved["facts"]:
+        yield {"type": "answer", "delta": REFUSAL}
+        yield {"type": "done", "grounding": grounding_check(REFUSAL, retrieved)}
+        return
     if client is None:
         yield {"type": "error", "detail": "The AI is not set up yet (GROQ_API_KEY is missing)."}
         return

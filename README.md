@@ -107,8 +107,22 @@ curl -X POST localhost:8000/ask -H "Content-Type: application/json" \
 
 Settings in `.env`: `GROQ_API_KEY`, `GROQ_MODEL`, `EMBEDDING_MODEL`, `VECTOR_TOP_K` (5), `VECTOR_MIN_SCORE` (0.65).
 
-Online: the same frontend and backend run on Vercel with Neo4j Aura. Vercel is too small for the
-embedding model, so online questions without an ID use keyword search.
+Online: the same frontend and backend run on Vercel with Neo4j Aura. Vercel deploys the API, but it
+does not run the graph-loading script. Load the data into Aura once from the repository root, using
+the same Aura instance/database that the deployed backend will use:
+
+```bash
+python -m pip install neo4j certifi
+python neo4j/load_remote.py
+```
+
+`load_remote.py` reads `NEO4J_URI`, `NEO4J_USER` (or `NEO4J_USERNAME`) and `NEO4J_PASSWORD` from
+the root `.env` file or the shell environment. **It clears the target graph before loading**, so
+check the URI/database first. In Vercel, configure `NEO4J_URI`, `NEO4J_USER` and `NEO4J_PASSWORD`
+with credentials for that same Aura database, then redeploy. Check the deployed `/health` endpoint:
+it should report about 40,661 nodes, not zero. The loader prints node and relationship totals when
+it finishes. Vercel is too small for the embedding model, so online questions without an ID use
+keyword search.
 
 ---
 

@@ -4,6 +4,7 @@ import pytest
 import config
 from api.routes import Question
 from rag import embeddings
+from rag import pipeline
 from rag.pipeline import answer, find_ids, is_follow_up, retrieve
 from rag.prompts import REFUSAL
 
@@ -37,6 +38,25 @@ def test_question_history_is_not_shared_between_requests():
 
     assert first.history == [{"question": "What is this?", "answer": "Answer"}]
     assert second.history == []
+
+
+def test_missing_graph_id_does_not_get_an_ungrounded_answer(monkeypatch):
+    monkeypatch.setattr(
+        pipeline,
+        "retrieve",
+        lambda question, history=(): {
+            "mode": "id_lookup",
+            "ids": ["CWE-287"],
+            "cypher": [],
+            "facts": [],
+            "not_found": ["CWE-287"],
+        },
+    )
+
+    events = list(pipeline.answer_stream("What attack patterns are linked to CWE-287?"))
+
+    assert events[1] == {"type": "answer", "delta": REFUSAL}
+    assert events[-1]["type"] == "done"
 
 
 @pytest.mark.skipif(not embeddings.available(), reason="embedding model not installed")
