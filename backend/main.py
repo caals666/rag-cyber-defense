@@ -18,6 +18,12 @@ async def lifespan(app):
 
 
 app = FastAPI(title="RAG for Robust Cyber Defense", version="0.1.0", lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=config.CORS_ORIGINS,
-                   allow_methods=["*"], allow_headers=["*"])
+# Keep CORS at the application boundary so preflight OPTIONS requests are handled before routing.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=config.CORS_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(router)
