@@ -2,3 +2,5 @@ fastapi>=0.115
 uvicorn[standard]>=0.30
 neo4j>=5.20
 groq>=1.7
+certifi>=2024.2
+python-dotenv>=1.0

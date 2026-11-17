@@ -7,10 +7,14 @@ stored as the node's `embedding` property. Resumable: nodes that already have on
 so it is safe to run again. Then it makes sure the vector indexes exist (see vector_index.cypher).
 """
 import os
+from pathlib import Path
 
+from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 INDEX_FOR = {"CVE": "cve_embedding", "CWE": "cwe_embedding", "CAPEC": "capec_embedding", "ATTACK": "attack_embedding"}

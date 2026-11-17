@@ -107,6 +107,12 @@ curl -X POST localhost:8000/ask -H "Content-Type: application/json" \
 
 Settings in `.env`: `GROQ_API_KEY`, `GROQ_MODEL`, `EMBEDDING_MODEL`, `VECTOR_TOP_K` (5), `VECTOR_MIN_SCORE` (0.65).
 
+To run the local API against Aura, put Aura's `neo4j+s://` URI, username and password in the root
+`.env`, then start the backend from `backend/` with `python -m uvicorn main:app --reload`. The backend
+loads the root `.env` automatically. With Docker Compose, the `backend` and `embed-init` services use
+those same settings; if `NEO4J_URI` is empty, they use the local Neo4j service instead. Check
+`http://localhost:8000/health` to see which database has been reached and how many nodes it contains.
+
 Online: the same frontend and backend run on Vercel with Neo4j Aura. Vercel deploys the API, but it
 does not run the graph-loading script. Load the data into Aura once from the repository root, using
 the same Aura instance/database that the deployed backend will use:
