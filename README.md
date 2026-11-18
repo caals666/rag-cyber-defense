@@ -10,7 +10,7 @@ with proof. Based on the paper *Retrieval Augmented Generation for Robust Cyber 
 
 - **Problem:** a normal AI chatbot guesses. It invents bug IDs and scores and gives no proof.
 - **Fix (RAG):** first *find* the real records, then let the AI answer *only* from them.
-- **Our data** is a graph of four official MITRE/NVD catalogues, linked in a chain:
+- **Our data** is a graph of four official MITRE/NVD catalogues, linked in  chain:
 
 ```
 CVE (a real bug) ──► CWE (the coding mistake) ──► CAPEC (how attackers exploit it) ──► ATT&CK (what they do next)
