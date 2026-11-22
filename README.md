@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/caals666/rag-cyber-defense)
+
 # Cyber Defense RAG
 
 Ask a cybersecurity question in plain English and get a short answer **built only from real security data**,
