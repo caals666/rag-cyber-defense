@@ -1,6 +1,5 @@
-# Cyber Defense RAG
-
 [![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-blue)](https://deepwiki.com/caals666/rag-cyber-defense)
+# Cyber Defense RAG
 
 Ask a cybersecurity question in plain English and get a short answer **built only from real security data**,
 with proof. Based on the paper *Retrieval Augmented Generation for Robust Cyber Defense*
