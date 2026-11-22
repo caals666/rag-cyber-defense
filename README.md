@@ -1,4 +1,4 @@
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/caals666/rag-cyber-defense)
+<a href="https://deepwiki.com/caals666/rag-cyber-defense"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
 # Cyber Defense RAG
 
