@@ -1,7 +1,6 @@
-<a href="https://deepwiki.com/caals666/rag-cyber-defense"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
-
 # Cyber Defense RAG
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/caals666/rag-cyber-defense)
 Ask a cybersecurity question in plain English and get a short answer **built only from real security data**,
 with proof. Based on the paper *Retrieval Augmented Generation for Robust Cyber Defense*
 (Rahman et. al, PNNL-36792, 2024). A 5-member Project School  team.
